@@ -117,10 +117,15 @@ const Navbar = () => {
               <p>$262.00</p>
             </div>
             <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+
             <div class="mt-6">
-              <a href="#" class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+              <a href='#' class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-indigo-700">Clear Bag</a>
             </div>
-            
+            <div class="mt-6">
+              <a href='#' class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
+            </div>
+
+
           </div>
         </div>
       </div>
