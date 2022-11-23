@@ -1,3 +1,4 @@
+
 /* eslint-disable @next/next/no-css-tags */
 import React from 'react'
 import Image from 'next/image'
@@ -7,31 +8,32 @@ BsCart2
 const Navbar = () => {
   return (
 
-    <div className='flex  flex-col md:flex-row md:justify-start justify-center items-center py-2'>
+    <div className='flex  flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky'>
       <div className="logo mx-5">
-        <Image src="" alt="logo" width={200} height={40} />
+        <Link href="/" legacyBehavior>
+          <a><Image src="" alt="logo" width={200} height={40} /></a>
+        </Link>
       </div>
-      <div className="nav">
-        <ul className='flex items-center space-x-2 font-bold md:text-xl'>
-          <Link href="/" legacyBehavior>
+      <div className="nav ">
+        <ul className='flex items-center space-x-8 font-bold md:text-md'>
+          <Link href="/tshirts" legacyBehavior>
             <a><li>Tshirts</li></a>
           </Link>
-          <Link href="/" legacyBehavior>
+          <Link href="/shorts" legacyBehavior>
             <a><li>Shorts</li></a>
           </Link>
-          <Link href="/" legacyBehavior>
+          <Link href="/sportswear" legacyBehavior>
             <a><li>SportsWear</li></a>
           </Link>
-          <Link href="/" legacyBehavior>
+          <Link href="/combo" legacyBehavior>
             <a><li>Combo</li></a>
           </Link>
         </ul >
       </div >
       <div className="cart absolute right-2 mx-5 top-4">
-        <button><BsCart2 className='text-xl md:text-2xl'/></button>
+        <button><BsCart2 className='text-xl md:text-2xl' /></button>
       </div>
     </div >
-
 
   )
 }
