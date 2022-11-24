@@ -171,7 +171,7 @@ const Slug = ({addToCart}) => {
                 {!service && service != null && <div className="text-red-800">Sorry! This Pincode is not Servivceable!</div>}
               </div>
               <div className="flex flex-wrap -mx-2 mb-12">
-                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0"><a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-600 rounded-xl cursor-pointer" href="#">Buy Now</a></div>
+                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0"><a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-600 rounded-xl cursor-pointer" href={'/checkout'}>Buy Now</a></div>
                 <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0"><a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-600 rounded-xl cursor-pointer" 
                 onClick={()=>{addToCart(slug,1,499.00,'NO-System-is-#UnHackable-Black/xl','xl','Black','https://m.media-amazon.com/images/I/512JaQMamfL._AC_AA152_.jpg')}}>Add to Bag</a></div>
                 {/* <div className="w-full md:w-1/3 px-2">

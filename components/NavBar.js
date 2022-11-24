@@ -6,10 +6,10 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react';
-import { BsHandbag } from 'react-icons/Bs';
+import { BsHandbag, BsTruck } from 'react-icons/Bs';
 import { MdDeleteOutline } from 'react-icons/Md';
 import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
-import { CiDeliveryTruck } from 'react-icons/Ci';
+
 
 
 const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
@@ -29,7 +29,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
   return (
     <>
 
-      <div className='flex  flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky'>
+      <div className='flex  flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky top-0 z-10 bg-white'>
         <div className="logo mx-5">
           <Link href="/" legacyBehavior>
             <a><img src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351" alt="logo" width={200} height={40} /></a>
@@ -57,7 +57,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
         <div ref={ref} className="h-[100vh] sidebar absolute top-0 right-0 bg-slate-100 p-10 transform transition-transform translate-x-full">
           <h1 className='font-bold text-3xl text-center'>Your Bag</h1>
           {/* <span className='text-xl md:text-2xl items-center'><CiDeliveryTruck /></span> */}
-          <h2 className='flex flex-1 items-center justify-center text-sm py-4'><CiDeliveryTruck className='text-lg md:text-2xl'/>Free Shipping & Free Returns!</h2>
+          <h2 className='flex flex-1 items-center justify-center text-sm py-4'><BsTruck className='text-lg md:text-2xl'/>Free Shipping & Free Returns!</h2>
           <span onClick={toogleCart} className="absolute top-5 right-2 cursor-pointer text-2xl"><IoMdClose /></span>
 
           {Object.keys(cart).length == 0 &&
@@ -115,7 +115,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
                   <a href='#' className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</a>
                 </div>
                 <div className="mt-6">
-                  <a href={'/checkout'} className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a>
+                  <Link href="/checkout" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>
                 </div>
 
 
