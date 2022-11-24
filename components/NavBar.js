@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
 /* eslint-disable @next/next/no-css-tags */
@@ -6,11 +7,12 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react';
 import { BsHandbag } from 'react-icons/Bs';
+import { MdDeleteOutline } from 'react-icons/Md';
 import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
 import { CiDeliveryTruck } from 'react-icons/Ci';
 
 
-const Navbar = () => {
+const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
   const ref = useRef()
   const toogleCart = () => {
     if (ref.current.classList.contains('translate-x-full')) {
@@ -30,7 +32,7 @@ const Navbar = () => {
       <div className='flex  flex-col md:flex-row md:justify-start justify-center items-center py-2 shadow-md sticky'>
         <div className="logo mx-5">
           <Link href="/" legacyBehavior>
-            <a><Image src="/" alt="logo" width={200} height={40} /></a>
+            <a><img src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351" alt="logo" width={200} height={40} /></a>
           </Link>
         </div>
         <div className="nav ">
@@ -52,81 +54,76 @@ const Navbar = () => {
         <div onClick={toogleCart} className="w-90 cart absolute right-2 mx-5 top-4 cursor-pointer">
           <button><BsHandbag className='text-xl md:text-2xl' /></button>
         </div>
-        <div ref={ref} className="sidebar absolute top-0 right-0 bg-pink-400 p-10 transform transition-transform translate-x-full">
-          <h2 className='font-bold text-xl text-center'>Your Bag</h2>
-          <span className='text-xl md:text-2xl items-center'><CiDeliveryTruck /></span>
-          <h2 className='text-center'>Free Shipping & Free Returns!</h2>
+        <div ref={ref} className="h-[100vh] sidebar absolute top-0 right-0 bg-slate-100 p-10 transform transition-transform translate-x-full">
+          <h1 className='font-bold text-3xl text-center'>Your Bag</h1>
+          {/* <span className='text-xl md:text-2xl items-center'><CiDeliveryTruck /></span> */}
+          <h2 className='flex flex-1 items-center justify-center text-sm py-4'><CiDeliveryTruck className='text-lg md:text-2xl'/>Free Shipping & Free Returns!</h2>
           <span onClick={toogleCart} className="absolute top-5 right-2 cursor-pointer text-2xl"><IoMdClose /></span>
-          <div class="mt-8">
-            <div class="flow-root">
-              <ul role="list" class="-my-6 divide-y divide-gray-200">
-                <li class="flex py-6">
-                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                    <img src="https://m.media-amazon.com/images/I/61WM3Hvg+UL._UY741_.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center" />
-                  </div>
 
-                  <div class="ml-4 flex flex-1 flex-col">
-                    <div>
-                      <div class="flex justify-between text-base font-medium text-black-900">
-                        <h3>
-                          <a href="#">Messi PSG Home Football Jersey</a>
-                        </h3>
-                        <p class="ml-4">₹499.00</p>
-                      </div>
-                      <p class="mt-1 text-sm ">Blue</p>
+          {Object.keys(cart).length == 0 &&
+            <>
+              <p className='text-center py-20'>Oh no, your bag is empty!</p>
+              <div className=" py-6 px-4 sm:px-6 m-4">
+                <div className="mt-6">
+                  <a href={'/'} className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Start Shopping</a>
+                </div>
+              </div>
+
+
+            </>
+          }
+
+          {Object.keys(cart).length != 0 && Object.keys(cart).map((k) => {
+            return <><div key={k} className="mt-8">
+              <div className="flow-root">
+                <ul role="list" className="-my-6 divide-y divide-gray-200">
+                  <li className="flex py-6">
+                    <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                      <img src={cart[k].img} className="h-full w-full object-cover object-center" />
                     </div>
-                    <div class="flex flex-1 items-center justify-between text-sm">
-                      <IoMdRemove /><p>Qty 1</p><IoMdAdd />
 
-                      <div class="flex">
-                        <button type="button" class="font-medium  hover:text-indigo-500">Remove</button>
+                    <div className="ml-4 flex flex-1 flex-col">
+                      <div>
+                        <div className="flex justify-between text-base font-medium text-black-900">
+                          <h3>
+                            <p className='font-blod'>{cart[k].name}</p>
+                          <p className="text-blue-500">₹{cart[k].price}</p>
+                          </h3>
+                        </div>
+                        <p className="mt-1 text-sm ">{cart[k].variant}/{cart[k].size}</p>
                       </div>
-                    </div>
-                  </div>
-                </li>
-                <li class="flex py-6">
-                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                    <img src="https://m.media-amazon.com/images/I/61WM3Hvg+UL._UY741_.jpg" alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt." class="h-full w-full object-cover object-center" />
-                  </div>
+                      <div className="flex flex-1 items-center justify-between text-sm">
+                        <IoMdRemove className='cursor-pointer' onClick={()=>{removeFromCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant,cart[k].img)}} /><p>Qty:{cart[k].qty}</p><IoMdAdd className='cursor-pointer' onClick={()=>{addToCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant,cart[k].img)}} />
 
-                  <div class="ml-4 flex flex-1 flex-col">
-                    <div>
-                      <div class="flex justify-between text-base font-medium text-black-900">
-                        <h3>
-                          <a href="#">Messi PSG Home Football Jersey</a>
-                        </h3>
-                        <p class="ml-4">₹499.00</p>
-                      </div>
-                      <p class="mt-1 text-sm ">Blue</p>
-                    </div>
-                    <div class="flex flex-1 items-center justify-between text-sm">
-                      <IoMdRemove /><p>Qty 1</p><IoMdAdd />
-
-                      <div class="flex">
-                        <button type="button" class="font-medium  hover:text-indigo-500">Remove</button>
+                        <div className="flex">
+                          <button type="button" className="font-medium   hover:text-slate-800" onClick={()=>{removeItemFromCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant,cart[k].img)}}><MdDeleteOutline/></button>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="border-t border-gray-200 py-6 px-4 sm:px-6 m-4">
-            <div class="flex justify-between text-base font-medium text-gray-900">
-              <p>Subtotal</p>
-              <p>$262.00</p>
-            </div>
-            <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                  </li>
 
-            <div class="mt-6">
-              <a href='#' class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-indigo-700">Clear Bag</a>
-            </div>
-            <div class="mt-6">
-              <a href='#' class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</a>
-            </div>
+                </ul>
+              </div>
+            </div><div className="border-t border-gray-200 py-6 px-4 sm:px-6 m-4">
+                <div className="flex justify-between text-base font-medium text-gray-900">
+                  <p>Subtotal</p>
+                  <p>₹{subTotal}</p>
+                </div>
+                <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+
+                <div className="mt-6">
+                  <a href='#' className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</a>
+                </div>
+                <div className="mt-6">
+                  <a href={'/checkout'} className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a>
+                </div>
 
 
-          </div>
+              </div></>
+          })}
+
+
+
         </div>
       </div>
 
