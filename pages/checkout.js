@@ -171,7 +171,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                 </div>
 
                 <div className="mt-6">
-                  <Link href="#" legacyBehavior><button className="inline-block w-full py-5 lg:py-3 px-10 text-lg leading-6 lg:leading-7 text-white font-medium tracking-tighter font-heading text-center bg-black hover:bg-green-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"><a ><span className="mr-2 text-base"></span>
+                  <Link href={'/order'} legacyBehavior><button className="inline-block w-full py-5 lg:py-3 px-10 text-lg leading-6 lg:leading-7 text-white font-medium tracking-tighter font-heading text-center bg-black hover:bg-green-600 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"><a ><span className="mr-2 text-base"></span>
                     <span>Pay ₹{subTotal}</span></a></button></Link>
                 </div>
 

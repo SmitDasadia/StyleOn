@@ -8,7 +8,9 @@ import Link from 'next/link'
 import { useRef } from 'react';
 import { BsHandbag, BsTruck } from 'react-icons/Bs';
 import { MdDeleteOutline } from 'react-icons/Md';
+import { HiOutlineUser } from 'react-icons/Hi';
 import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
+
 
 
 
@@ -37,27 +39,32 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
         </div>
         <div className="nav ">
           <ul className='flex items-center space-x-8 font-bold md:text-md'>
-            <Link href="/tshirts" legacyBehavior>
+            <Link href={'/tshirts'} legacyBehavior>
               <a><li>Tshirts</li></a>
             </Link>
-            <Link href="/shorts" legacyBehavior>
+            <Link href={'/shorts'} legacyBehavior>
               <a><li>Shorts</li></a>
             </Link>
-            <Link href="/sportswear" legacyBehavior>
+            <Link href={'/sportswear'} legacyBehavior>
               <a><li>SportsWear</li></a>
             </Link>
-            <Link href="/combo" legacyBehavior>
+            <Link href={'/combo'} legacyBehavior>
               <a><li>Combo</li></a>
             </Link>
           </ul >
         </div >
-        <div onClick={toogleCart} className="w-90 cart absolute right-2 mx-5 top-4 cursor-pointer">
-          <button><BsHandbag className='text-xl md:text-2xl' /></button>
+
+        <div className="w-90 cart absolute right-2 mx-5 top-4 cursor-pointer flex">
+          <Link href={'/login'} legacyBehavior>
+            <a><HiOutlineUser className='text-xl md:text-2xl mx-2 my-1' /></a>
+          </Link>
+
+          <button onClick={toogleCart}><BsHandbag className='text-xl md:text-2xl mx-2' /></button>
         </div>
-        <div ref={ref} className="h-[100vh] sidebar absolute top-0 right-0 bg-slate-100 p-10 transform transition-transform translate-x-full">
+        <div ref={ref} className={`h-[100vh] sidebar absolute top-0 right-0 bg-slate-100 p-10 transform transition-transform ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
           <h1 className='font-bold text-3xl text-center'>Your Bag</h1>
           {/* <span className='text-xl md:text-2xl items-center'><CiDeliveryTruck /></span> */}
-          <h2 className='flex flex-1 items-center justify-center text-sm py-4'><BsTruck className='text-lg md:text-2xl'/>Free Shipping & Free Returns!</h2>
+          <h2 className='flex flex-1 items-center justify-center text-sm py-4'><BsTruck className='text-lg md:text-2xl' />Free Shipping & Free Returns!</h2>
           <span onClick={toogleCart} className="absolute top-5 right-2 cursor-pointer text-2xl"><IoMdClose /></span>
 
           {Object.keys(cart).length == 0 &&
@@ -87,16 +94,16 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
                         <div className="flex justify-between text-base font-medium text-black-900">
                           <h3>
                             <p className='font-blod'>{cart[k].name}</p>
-                          <p className="text-blue-500">₹{cart[k].price}</p>
+                            <p className="text-blue-500">₹{cart[k].price}</p>
                           </h3>
                         </div>
                         <p className="mt-1 text-sm ">{cart[k].variant}/{cart[k].size}</p>
                       </div>
                       <div className="flex flex-1 items-center justify-between text-sm">
-                        <IoMdRemove className='cursor-pointer' onClick={()=>{removeFromCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant,cart[k].img)}} /><p>Qty:{cart[k].qty}</p><IoMdAdd className='cursor-pointer' onClick={()=>{addToCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant,cart[k].img)}} />
+                        <IoMdRemove className='cursor-pointer' onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} /><p>Qty:{cart[k].qty}</p><IoMdAdd className='cursor-pointer' onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} />
 
                         <div className="flex">
-                          <button type="button" className="font-medium   hover:text-slate-800" onClick={()=>{removeItemFromCart(k,1,cart[k].price,cart[k].name,cart[k].size,cart[k].variant,cart[k].img)}}><MdDeleteOutline/></button>
+                          <button type="button" className="font-medium   hover:text-slate-800" onClick={() => { removeItemFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }}><MdDeleteOutline /></button>
                         </div>
                       </div>
                     </div>
@@ -112,7 +119,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
 
                 <div className="mt-6">
-                  <a href='#' className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</a>
+                  <div className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</div>
                 </div>
                 <div className="mt-6">
                   <Link href="/checkout" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>

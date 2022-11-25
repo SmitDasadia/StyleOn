@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 
-const Slug = ({addToCart}) => {
+const Slug = ({ addToCart }) => {
   const router = useRouter()
   const { slug } = router.query
 
@@ -13,7 +14,7 @@ const Slug = ({addToCart}) => {
   const checkPincode = async () => {
     const pins = await fetch('http://localhost:3000/api/pincode')
     let pinJson = await pins.json()
-    if (pinJson.includes(parseInt(pin))){
+    if (pinJson.includes(parseInt(pin))) {
       setService(true)
     }
     else {
@@ -164,16 +165,23 @@ const Slug = ({addToCart}) => {
               <div className="pincode mb-10">
                 <h4 className="mb-3 font-heading font-medium">Pincode:</h4>
                 <input onChange={onChangePinCode} className=" px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" type="text" placeholder="Enter Your Pincode" /> <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl" onClick={checkPincode}>
+                  className="bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-xl" onClick={checkPincode}>
                   Check
                 </button>
                 {service && service != null && <div className="text-green-800">This Pincode is Servivceable!</div>}
                 {!service && service != null && <div className="text-red-800">Sorry! This Pincode is not Servivceable!</div>}
               </div>
               <div className="flex flex-wrap -mx-2 mb-12">
-                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0"><a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-600 rounded-xl cursor-pointer" href={'/checkout'}>Buy Now</a></div>
-                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0"><a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-blue-500 focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-blue-600 rounded-xl cursor-pointer" 
-                onClick={()=>{addToCart(slug,1,499.00,'NO-System-is-#UnHackable-Black/xl','xl','Black','https://m.media-amazon.com/images/I/512JaQMamfL._AC_AA152_.jpg')}}>Add to Bag</a></div>
+                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
+                  <Link href={'/checkout'} legacyBehavior>
+                    <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer">Buy Now</a>
+                  </Link>
+                </div>
+
+                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
+                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer"
+                    onClick={() => { addToCart(slug, 1, 499.00, 'NO-System-is-#UnHackable-Black/xl', 'xl', 'Black', 'https://m.media-amazon.com/images/I/512JaQMamfL._AC_AA152_.jpg') }}>Add to Bag</a>
+                </div>
                 {/* <div className="w-full md:w-1/3 px-2">
                   <a className="flex w-full py-4 px-2 items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-white focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-xl" href="#">
                     <span className="mr-2">Wishlist</span>

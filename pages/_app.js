@@ -11,6 +11,8 @@ function MyApp({ Component, pageProps }) {
     try {
       if (localStorage.getItem("cart")) {
         setCart(JSON.parse(localStorage.getItem("cart")))
+        saveCart(JSON.parse(localStorage.getItem("cart")))
+        
       }
     } catch (error) {
       console.error(error)
@@ -71,7 +73,7 @@ function MyApp({ Component, pageProps }) {
   }
 
   return <>
-    <NavBar cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} 
+    <NavBar key={subTotal} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} 
     subTotal={subTotal} removeItemFromCart={removeItemFromCart} />
     <Component cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} 
     subTotal={subTotal} removeItemFromCart={removeItemFromCart} {...pageProps} />
