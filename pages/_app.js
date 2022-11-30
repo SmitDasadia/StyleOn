@@ -62,10 +62,7 @@ function MyApp({ Component, pageProps }) {
 
   const removeItemFromCart = (itemCode, qty, price, name, size, variant, img) => {
     let newCart = cart;
-    if (itemCode in cart) {
-      newCart[itemCode].qty = cart[itemCode].qty - qty
-    }
-    if (newCart[itemCode]["qty"] < 1) {
+    if (newCart[itemCode]["qty"] >= 1) {
       delete newCart[itemCode]
     }
     setCart(newCart)
