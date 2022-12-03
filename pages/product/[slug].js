@@ -2,8 +2,11 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import Product from '../../models/Product'
+import mongoose from 'mongoose'
 
-const Slug = ({ addToCart }) => {
+const Slug = ({ addToCart, product, variants }) => {
+
   const router = useRouter()
   const { slug } = router.query
 
@@ -11,6 +14,9 @@ const Slug = ({ addToCart }) => {
   const [show2, setShow2] = useState(false);
   const [pin, setPin] = useState()
   const [service, setService] = useState()
+  const [color, setColor] = useState(product.color)
+  const [size, setSize] = useState(product.size)
+
   const checkPincode = async () => {
     const pins = await fetch('http://localhost:3000/api/pincode')
     let pinJson = await pins.json()
@@ -25,6 +31,12 @@ const Slug = ({ addToCart }) => {
   const onChangePinCode = (e) => {
     setPin(e.target.value)
   }
+
+  const refershVarint = (newsize, newcolor) => {
+    let url = `http://localhost:3000/product/${variants[newcolor][newsize]['slug']}`;
+    window.location = url;
+  }
+
   return (
     <>
       <section className="pt-12 pb-24 bg-blueGray-100 rounded-b-10xl overflow-hidden">
@@ -128,33 +140,52 @@ const Slug = ({ addToCart }) => {
                   <span>Color:</span>
                   {/* <span className="text-gray-400">Silver</span> */}
                 </h4>
-                <button className="inline-flex items-center justify-center p-1 rounded-full border border-gray-300">
-                  <div className="w-6 h-6 rounded-full bg-white"></div>
-                </button>
-                <button className="inline-flex items-center justify-center p-1 rounded-full border border-transparent">
-                  <div className="w-6 h-6 rounded-full bg-orange-800"></div>
-                </button>
-                <button className="inline-flex items-center justify-center p-1 rounded-full border border-transparent">
-                  <div className="w-6 h-6 rounded-full bg-blue-900"></div>
-                </button>
-                <button className="inline-flex items-center justify-center p-1 rounded-full border border-transparent">
-                  <div className="w-6 h-6 rounded-full bg-yellow-500"></div>
-                </button>
+
+                {Object.keys(variants).includes('White') && Object.keys(variants['White']).includes(size) &&
+                  <button onClick={() => { refershVarint(size, 'White') }} className="inline-flex items-center justify-center p-1 rounded-full border border-gray-300">
+                    <div className="w-6 h-6 rounded-full bg-white"></div>
+                  </button>}
+                {Object.keys(variants).includes('Black') && Object.keys(variants['Black']).includes(size) &&
+                  <button onClick={()=>{refershVarint(size, 'Black')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                    <div className="w-6 h-6 rounded-full bg-black"></div>
+                  </button>}
+                {Object.keys(variants).includes('Blue') && Object.keys(variants['Blue']).includes(size) &&
+                  <button onClick={()=>{refershVarint(size, 'Blue')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                    <div className="w-6 h-6 rounded-full bg-blue-600"></div>
+                  </button>}
+                {Object.keys(variants).includes('Red') && Object.keys(variants['Red']).includes(size) &&
+                  <button onClick={()=>{refershVarint(size, 'Red')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                    <div className="w-6 h-6 rounded-full bg-red-600"></div>
+                  </button>}
+                {Object.keys(variants).includes('Yellow') && Object.keys(variants['Yellow']).includes(size) &&
+                  <button onClick={()=>{refershVarint(size, 'Yellow')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                    <div className="w-6 h-6 rounded-full bg-yellow-400"></div>
+                  </button>}
+                {Object.keys(variants).includes('Green') && Object.keys(variants['Green']).includes(size) &&
+                  <button onClick={()=>{refershVarint(size, 'Green')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                    <div className="w-6 h-6 rounded-full bg-green-600"></div>
+                  </button>}
+
               </div>
 
               <div className="Size mb-10">
                 <h4 className="mb-3 font-heading font-medium">Size:</h4>
-                <select className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
-                  <option>S</option>
-                  <option>M</option>
-                  <option>L</option>
-                  <option>XL</option>
-                  <option>2XL</option>
-                  <option>3XL</option>
-                  <option>4XL</option>
-                  <option>5XL</option>
-                  <option>6XL</option>
-                </select>
+                {/* <select onChange={(e) => { refershVarint(e.target.value, color) }} className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
+
+                  {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
+                  {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
+                  {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
+                  {Object.keys(variants[color]).includes('XL') && <option value={'XL'}>XL</option>}
+                  {Object.keys(variants[color]).includes('XXL') && <option value={'XXL'}>XXL</option>}
+                </select> */}
+
+                <select value={size} onChange={(e) => { refershVarint(e.target.value, color) }} class="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
+                {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
+                {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
+                {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
+                
+              </select>
+
                 <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center r">
                   <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 cursor-pointe" viewBox="0 0 24 24">
                     <path d="M6 9l6 6 6-6"></path>
@@ -262,6 +293,31 @@ const Slug = ({ addToCart }) => {
       </section>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      family: 4,
+    })
+  }
+  let product = await Product.findOne({ slug: context.query.slug })
+  let variants = await Product.find({ title: product.title })
+  let colorSizeSlug = {}// {red:{xl:{slug:'hacker-Tshirt(S,Red)'}}}
+  for (let item of variants) {
+    if (Object.keys(colorSizeSlug).includes(item.color)) {
+      colorSizeSlug[item.color][item.size] = { slug: item.slug }
+    } else {
+      colorSizeSlug[item.color] = {}
+      colorSizeSlug[item.color][item.size] = { slug: item.slug }
+    }
+  }
+
+  return {
+    props: { product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSizeSlug)) }, // will be passed to the page component as props
+  }
 }
 
 export default Slug
