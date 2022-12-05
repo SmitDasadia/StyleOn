@@ -4,13 +4,13 @@ import Link from 'next/link'
 import Product from '../models/Product';
 const mongoose = require('mongoose');
 
-const SportsWear = ({ products }) => {
+const Bundi = ({ products }) => {
   return (
     <div>
       <section className="text-gray-600 body-font">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4 justify-center">
-          {Object.keys(products).length === 0 && <p>Out Of Stcok</p>}
+            {Object.keys(products).length === 0 && <p>Out Of Stcok</p>}
             {Object.keys(products).map((item) => {
 
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`} legacyBehavior>
@@ -81,33 +81,33 @@ const SportsWear = ({ products }) => {
 
 export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState) {
-    await mongoose.connect(process.env.MONGO_URI,{
-          useNewUrlParser: true,
-          useUnifiedTopology: true,
-          family: 4,
-      })
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      family: 4,
+    })
   }
-  let products = await Product.find({ category: "SportsWear" })
-  let sportswear = {}
+  let products = await Product.find({ category: "Bundi" })
+  let bundi = {}
   for (let item of products) {
-    if (item.title in sportswear) {
-      if (!sportswear[item.title].color.includes(item.color) && item.avialableQty > 0) {
-        sportswear[item.title].color.push(item.color)
+    if (item.title in bundi) {
+      if (!bundi[item.title].color.includes(item.color) && item.avialableQty > 0) {
+        bundi[item.title].color.push(item.color)
       }
-      if (!sportswear[item.title].size.includes(item.size) && item.avialableQty > 0) {
-        sportswear[item.title].size.push(item.size)
+      if (!bundi[item.title].size.includes(item.size) && item.avialableQty > 0) {
+        bundi[item.title].size.push(item.size)
       }
     } else {
-      sportswear[item.title] = JSON.parse(JSON.stringify(item))
+      bundi[item.title] = JSON.parse(JSON.stringify(item))
       if (item.avialableQty > 0) {
-        sportswear[item.title].color = [item.color]
-        sportswear[item.title].size = [item.size]
+        bundi[item.title].color = [item.color]
+        bundi[item.title].size = [item.size]
       }
     }
   }
   return {
-    props: { products: JSON.parse(JSON.stringify(sportswear)) }, // will be passed to the page component as props
+    props: { products: JSON.parse(JSON.stringify(bundi)) }, // will be passed to the page component as props
   }
 }
 
-export default SportsWear
+export default Bundi

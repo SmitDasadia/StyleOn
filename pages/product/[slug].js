@@ -4,8 +4,10 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Product from '../../models/Product'
 import mongoose from 'mongoose'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const Slug = ({ addToCart, product, variants }) => {
+const Slug = ({ addToCart, product, variants, buyNow }) => {
 
   const router = useRouter()
   const { slug } = router.query
@@ -22,9 +24,30 @@ const Slug = ({ addToCart, product, variants }) => {
     let pinJson = await pins.json()
     if (pinJson.includes(parseInt(pin))) {
       setService(true)
+      toast.success('Your PinCode is serviceable!', {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     }
     else {
       setService(false)
+      toast.error('Sorry,Your PinCode is not serviceable!', {
+        position: "top-left",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+
     }
   }
 
@@ -37,9 +60,22 @@ const Slug = ({ addToCart, product, variants }) => {
     window.location = url;
   }
 
+
   return (
     <>
       <section className="pt-12 pb-24 bg-blueGray-100 rounded-b-10xl overflow-hidden">
+        <ToastContainer
+          position="top-left"
+          autoClose={3}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+        />
         <div className="container px-4 mx-auto">
           <div className="flex flex-wrap -mx-4">
             {/* <div className="w-full px-4">
@@ -146,23 +182,23 @@ const Slug = ({ addToCart, product, variants }) => {
                     <div className="w-6 h-6 rounded-full bg-white"></div>
                   </button>}
                 {Object.keys(variants).includes('Black') && Object.keys(variants['Black']).includes(size) &&
-                  <button onClick={()=>{refershVarint(size, 'Black')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                  <button onClick={() => { refershVarint(size, 'Black') }} className="inline-flex items-center justify-center p-1 rounded-full">
                     <div className="w-6 h-6 rounded-full bg-black"></div>
                   </button>}
                 {Object.keys(variants).includes('Blue') && Object.keys(variants['Blue']).includes(size) &&
-                  <button onClick={()=>{refershVarint(size, 'Blue')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                  <button onClick={() => { refershVarint(size, 'Blue') }} className="inline-flex items-center justify-center p-1 rounded-full">
                     <div className="w-6 h-6 rounded-full bg-blue-600"></div>
                   </button>}
                 {Object.keys(variants).includes('Red') && Object.keys(variants['Red']).includes(size) &&
-                  <button onClick={()=>{refershVarint(size, 'Red')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                  <button onClick={() => { refershVarint(size, 'Red') }} className="inline-flex items-center justify-center p-1 rounded-full">
                     <div className="w-6 h-6 rounded-full bg-red-600"></div>
                   </button>}
                 {Object.keys(variants).includes('Yellow') && Object.keys(variants['Yellow']).includes(size) &&
-                  <button onClick={()=>{refershVarint(size, 'Yellow')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                  <button onClick={() => { refershVarint(size, 'Yellow') }} className="inline-flex items-center justify-center p-1 rounded-full">
                     <div className="w-6 h-6 rounded-full bg-yellow-400"></div>
                   </button>}
                 {Object.keys(variants).includes('Green') && Object.keys(variants['Green']).includes(size) &&
-                  <button onClick={()=>{refershVarint(size, 'Green')}} className="inline-flex items-center justify-center p-1 rounded-full">
+                  <button onClick={() => { refershVarint(size, 'Green') }} className="inline-flex items-center justify-center p-1 rounded-full">
                     <div className="w-6 h-6 rounded-full bg-green-600"></div>
                   </button>}
 
@@ -180,16 +216,16 @@ const Slug = ({ addToCart, product, variants }) => {
                 </select> */}
 
                 <select value={size} onChange={(e) => { refershVarint(e.target.value, color) }} className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
-                {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
-                {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
-                {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
-                {Object.keys(variants[color]).includes('XL') && <option value={'XL'}>XL</option>}
-                {Object.keys(variants[color]).includes('2XL') && <option value={'2XL'}>2XL</option>}
-                {Object.keys(variants[color]).includes('3XL') && <option value={'3XL'}>3XL</option>}
-                {Object.keys(variants[color]).includes('4XL') && <option value={'4XL'}>4XL</option>}
-                {Object.keys(variants[color]).includes('5XL') && <option value={'5XL'}>5XL</option>}
-                
-              </select>
+                  {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
+                  {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
+                  {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
+                  {Object.keys(variants[color]).includes('XL') && <option value={'XL'}>XL</option>}
+                  {Object.keys(variants[color]).includes('2XL') && <option value={'2XL'}>2XL</option>}
+                  {Object.keys(variants[color]).includes('3XL') && <option value={'3XL'}>3XL</option>}
+                  {Object.keys(variants[color]).includes('4XL') && <option value={'4XL'}>4XL</option>}
+                  {Object.keys(variants[color]).includes('5XL') && <option value={'5XL'}>5XL</option>}
+
+                </select>
 
                 <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center r">
                   <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 cursor-pointe" viewBox="0 0 24 24">
@@ -204,20 +240,20 @@ const Slug = ({ addToCart, product, variants }) => {
                   className="bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-xl" onClick={checkPincode}>
                   Check
                 </button>
-                {service && service != null && <div className="text-green-800">This Pincode is Servivceable!</div>}
-                {!service && service != null && <div className="text-red-800">Sorry! This Pincode is not Servivceable!</div>}
+                {/* {service && service != null && <div className="text-green-800">This Pincode is Servivceable!</div>}
+                {!service && service != null && <div className="text-red-800">Sorry! This Pincode is not Servivceable!</div>} */}
               </div>
               <div className="flex flex-wrap -mx-2 mb-12">
-                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
-                  <Link href={'/checkout'} legacyBehavior>
-                    <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer">Buy Now</a>
-                  </Link>
-                </div>
+                <button onClick={() => { buyNow(slug, 1, product.price, product.title, size, color, product.img) }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
 
-                <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
+                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer">BuyNow</a>
+
+                </button>
+
+                <button className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
                   <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer"
                     onClick={() => { addToCart(slug, 1, product.price, product.title, size, color, product.img) }}>Add to Bag</a>
-                </div>
+                </button>
                 {/* <div className="w-full md:w-1/3 px-2">
                   <a className="flex w-full py-4 px-2 items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-white focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-xl" href="#">
                     <span className="mr-2">Wishlist</span>
@@ -309,7 +345,7 @@ export async function getServerSideProps(context) {
     })
   }
   let product = await Product.findOne({ slug: context.query.slug })
-  let variants = await Product.find({ title: product.title })
+  let variants = await Product.find({ title: product.title, category: product.category })
   let colorSizeSlug = {}// {red:{xl:{slug:'hacker-Tshirt(S,Red)'}}}
   for (let item of variants) {
     if (Object.keys(colorSizeSlug).includes(item.color)) {

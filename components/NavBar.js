@@ -48,8 +48,8 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
           <Link href={'/sportswear'} legacyBehavior>
             <a><li>SportsWear</li></a>
           </Link>
-          <Link href={'/combo'} legacyBehavior>
-            <a><li>Combo</li></a>
+          <Link href={'/bundi'} legacyBehavior>
+            <a><li>Bundi</li></a>
           </Link>
         </ul >
       </div >
@@ -100,7 +100,7 @@ const Navbar = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeIt
                             <p className="text-blue-500">₹{cart[k].price}</p>
                           </h3>
                         </div>
-                        <p className="mt-1 text-sm ">{cart[k].variant}/{cart[k].size}</p>
+                        <p className="mt-1 text-sm ">{cart[k].size}/{cart[k].variant}</p>
                       </div>
                       <div className="flex flex-1 items-center justify-between text-sm">
                         {/* <IoMdRemove className='cursor-pointer' onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} /><p>Qty:{cart[k].qty}</p><IoMdAdd className='cursor-pointer' onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} /> */}
