@@ -1,5 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
+
+/* eslint-disable @next/next/no-css-tags */
 import React from 'react'
+import Link from 'next/link'
 
 const Footer = () => {
   return (
@@ -16,71 +21,46 @@ const Footer = () => {
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
               <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
               <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">First Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                </li>
+                <Link href={'/tshirts'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Tshirts</li></a>
+                </Link>
+                <Link href={'/shorts'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Shorts</li></a>
+                </Link>
+                <Link href={'/sportswear'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Sportswear</li></a>
+                </Link>
+                <Link href={'/combo'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Combo</li></a>
+                </Link>
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">Policies</h2>
               <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">First Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                </li>
+                <Link href={'/privacy'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Privacy Policy</li></a>
+                </Link>
+                <Link href={'/shipping'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Shipping Policy</li></a>
+                </Link>
+                <Link href={'/refund'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Refund Policy</li></a>
+                </Link>
+                <Link href={'/termofservice'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Terms of Service</li></a>
+                </Link>
               </nav>
             </div>
             <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">About</h2>
               <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">First Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                </li>
+                <Link href={'/about'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>About Style.com</li></a>
+                </Link>
               </nav>
             </div>
-            <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-              <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-              <nav className="list-none mb-10">
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">First Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-                </li>
-                <li>
-                  <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                </li>
-              </nav>
-            </div>
+            
           </div>
         </div>
         <div className="bg-gray-100">

@@ -89,21 +89,21 @@ const Slug = ({ addToCart, product, variants }) => {
               </svg>
             </a> */}
                 </div>
-                <div className="w-full sm:w-9/12 px-4">
-                  <img className="mb-5" src="https://m.media-amazon.com/images/I/512JaQMamfL._UX679_.jpg" alt="" />
+                <div className="w-full sm:w-9/12 px-10">
+                  <img className="mb-5" src={product.img} alt={product.title} />
                   {/* <p className="text-sm text-gray-300">Roll over image to zoom in</p> */}
                 </div>
               </div>
             </div>
             <div className="w-full lg:w-1/2 px-4">
-              <div className="max-w-md mb-6">
-                <span className="text text-gray-400 tracking-wider">NO System is #UnHackable</span>
-                <h2 className="mt-6 mb-4 text-xl md:text-xl lg:text-3xl font-heading font-medium">NO System is #UnHackable</h2>
-                <h3 className="mt-6 mb-4 text-xl md:text-xl lg:text-3xl font-heading font-medium">Black/xl</h3>
+              <div className="max-w-md mb-3">
+                <span className="text text-gray-400 tracking-wider">Style.com</span>
+                <h2 className="mt-6 mb-4 text-xl md:text-xl lg:text-3xl font-heading font-medium">{product.title}</h2>
+                <h3 className="mt-6 mb-4 text-xl md:text-sm lg:text-xl font-heading font-medium">{product.color}/{product.size}</h3>
                 <p className="flex items-center mb-6">
-                  <span className="text-3xl text-blue-500 font-medium">₹499.00</span>
+                  <span className="text-3xl text-blue-500 font-medium">₹{product.price}</span>
                 </p>
-                <p className="text-lg text-gray-400">This T-Shirt is very good.</p>
+                <p className="text-lg text-gray-400">{product.desc}</p>
               </div>
               {/* <div className="flex mb-6 items-center">
           <div className="inline-flex mr-4">
@@ -179,10 +179,15 @@ const Slug = ({ addToCart, product, variants }) => {
                   {Object.keys(variants[color]).includes('XXL') && <option value={'XXL'}>XXL</option>}
                 </select> */}
 
-                <select value={size} onChange={(e) => { refershVarint(e.target.value, color) }} class="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
+                <select value={size} onChange={(e) => { refershVarint(e.target.value, color) }} className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
                 {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
                 {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
                 {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
+                {Object.keys(variants[color]).includes('XL') && <option value={'XL'}>XL</option>}
+                {Object.keys(variants[color]).includes('2XL') && <option value={'2XL'}>2XL</option>}
+                {Object.keys(variants[color]).includes('3XL') && <option value={'3XL'}>3XL</option>}
+                {Object.keys(variants[color]).includes('4XL') && <option value={'4XL'}>4XL</option>}
+                {Object.keys(variants[color]).includes('5XL') && <option value={'5XL'}>5XL</option>}
                 
               </select>
 
@@ -211,7 +216,7 @@ const Slug = ({ addToCart, product, variants }) => {
 
                 <div className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
                   <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer"
-                    onClick={() => { addToCart(slug, 1, 499.00, 'NO-System-is-#UnHackable-Black/xl', 'xl', 'Black', 'https://m.media-amazon.com/images/I/512JaQMamfL._AC_AA152_.jpg') }}>Add to Bag</a>
+                    onClick={() => { addToCart(slug, 1, product.price, product.title, size, color, product.img) }}>Add to Bag</a>
                 </div>
                 {/* <div className="w-full md:w-1/3 px-2">
                   <a className="flex w-full py-4 px-2 items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-white focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-xl" href="#">
