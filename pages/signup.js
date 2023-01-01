@@ -1,17 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
+import { useRouter } from 'next/router';
 import Link from 'next/link'
 import { HiOutlineLockClosed } from 'react-icons/Hi';
 import { set } from 'mongoose';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const Signup = () => {
-  const [name, setName] = useState()
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const router = useRouter()
+  useEffect(() => {
+    if(localStorage.getItem('token')){
+      router.push('/')
+    }
+  },)
 
   const handleChange = (e) => {
     if (e.target.name == 'name') {
@@ -28,7 +34,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = { name, email, password }
-    let res = await fetch('http://localhost:3000/api/signUp', {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/signUp`, {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
@@ -50,6 +56,9 @@ const Signup = () => {
       progress: undefined,
       theme: "light",
     });
+    setTimeout(() => {
+      router.push('http://localhost:3000/login')
+    }, 4000);
   }
 
   return (
@@ -66,14 +75,14 @@ const Signup = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 h-screen">
         <div className="w-full max-w-md space-y-8">
           <div>
             {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> */}
             <h2 className="mt-6 text-center text-5xl font-bold tracking-tight text-gray-900">Create an Account</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or
-              <Link href={'/signup'} legacyBehavior>
+              <Link href={'/login'} legacyBehavior>
                 <a className="mx-2 font-medium text-indigo-600 hover:text-indigo-500">login</a>
               </Link>
 

@@ -7,10 +7,10 @@ const mongoose = require('mongoose');
 const Shorts = ({ products }) => {
   return (
     <div>
-      <section className="text-gray-600 body-font">
+      <section className="text-gray-600 body-font ">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-wrap -m-4 justify-center">
-            {Object.keys(products).length === 0 && <p>Out Of Stcok</p>}
+            {Object.keys(products).length === 0 && <p className='h-screen'>Out Of Stcok</p>}
             {Object.keys(products).map((item) => {
 
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`} legacyBehavior>

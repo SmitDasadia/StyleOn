@@ -14,13 +14,14 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
 
   const [show, setShow] = useState(false);
   const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
   const [pin, setPin] = useState()
   const [service, setService] = useState()
   const [color, setColor] = useState(product.color)
   const [size, setSize] = useState(product.size)
 
   const checkPincode = async () => {
-    const pins = await fetch('http://localhost:3000/api/pincode')
+    const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
     let pinJson = await pins.json()
     if (pinJson.includes(parseInt(pin))) {
       setService(true)
@@ -56,7 +57,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
   }
 
   const refershVarint = (newsize, newcolor) => {
-    let url = `http://localhost:3000/product/${variants[newcolor][newsize]['slug']}`;
+    let url = `${process.env.NEXT_PUBLIC_HOST}/product/${variants[newcolor][newsize]['slug']}`;
     window.location = url;
   }
 
@@ -76,7 +77,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
           pauseOnHover
           theme="light"
         />
-        <div className="container px-4 mx-auto">
+        <div className="container px-4 mx-auto ">
           <div className="flex flex-wrap -mx-4">
             {/* <div className="w-full px-4">
         <ul className="flex flex-wrap items-center mb-16">
@@ -134,12 +135,12 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
             <div className="w-full lg:w-1/2 px-4">
               <div className="max-w-md mb-3">
                 <span className="text text-gray-400 tracking-wider">Style.com</span>
-                <h2 className="mt-6 mb-4 text-xl md:text-xl lg:text-3xl font-heading font-medium">{product.title}</h2>
-                <h3 className="mt-6 mb-4 text-xl md:text-sm lg:text-xl font-heading font-medium">{product.color}/{product.size}</h3>
+                <h2 className="mt-6 mb-4 text-xl md:text-xl lg:text-xl font-heading font-medium">{product.title} ({product.color}/{product.size})</h2>
+                {/* <h3 className="mt-6 mb-4 text-xl md:text-sm lg:text-xl font-heading font-medium"></h3> */}
                 <p className="flex items-center mb-6">
                   <span className="text-3xl text-blue-500 font-medium">₹{product.price}</span>
                 </p>
-                <p className="text-lg text-gray-400">{product.desc}</p>
+                {/* <p className="text-sm  text-gray-400"></p> */}
               </div>
               {/* <div className="flex mb-6 items-center">
           <div className="inline-flex mr-4">
@@ -286,7 +287,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                 <div>
                   <div className="border-t border-b py-4 mt-7 border-gray-200">
                     <div onClick={() => setShow(!show)} className="flex justify-between items-center cursor-pointer">
-                      <p className="text-base leading-4 text-gray-800">Shipping and returns</p>
+                      <p className="text-base leading-4 text-gray-800">Desc</p>
                       <button
                         className="
 									cursor-pointer
@@ -301,14 +302,14 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                       </button>
                     </div>
                     <div className={"pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 " + (show ? "block" : "hidden")} id="sect">
-                      You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are nonrefundable
+                      {product.desc}
                     </div>
                   </div>
                 </div>
                 <div>
                   <div className="border-b py-4 border-gray-200">
                     <div onClick={() => setShow2(!show2)} className="flex justify-between items-center cursor-pointer">
-                      <p className="text-base leading-4 text-gray-800">Contact us</p>
+                      <p className="text-base leading-4 text-gray-800">Shipping and returns</p>
                       <button
                         className="
 									cursor-pointer
@@ -323,10 +324,11 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                       </button>
                     </div>
                     <div className={"pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 " + (show2 ? "block" : "hidden")} id="sect">
-                      If you have any questions on how to return your item to us, contact us.
+                    You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are nonrefundable
                     </div>
                   </div>
                 </div>
+               
               </div>
             </div>
           </div>

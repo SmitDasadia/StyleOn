@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import Link from 'next/link'
 import { HiOutlineLockClosed } from 'react-icons/Hi';
 import { ToastContainer, toast } from 'react-toastify';
@@ -9,10 +9,17 @@ import { useRouter } from 'next/router';
 
 
 const Login = () => {
-  const [name, setName] = useState()
-  const [email, setEmail] = useState()
-  const [password, setPassword] = useState()
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const router = useRouter()
+
+  useEffect(() => {
+    if(localStorage.getItem('token')){
+      router.push('/')
+    }
+  })
+  
 
   const handleChange = (e) => {
     if (e.target.name == 'email') {
@@ -26,7 +33,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = { email, password }
-    let res = await fetch('http://localhost:3000/api/login', {
+    let res = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/login`, {
       method: 'POST', // or 'PUT'
       headers: {
         'Content-Type': 'application/json',
@@ -38,6 +45,7 @@ const Login = () => {
     setEmail('')
     setPassword('')
     if (respose.success) {
+      localStorage.setItem('token', respose.token)
       toast.success('You are successfully logged in.', {
         position: "top-left",
         autoClose: 3000,
@@ -49,8 +57,8 @@ const Login = () => {
         theme: "light",
       });
       setTimeout(() => {
-        router.push('http://localhost:3000')
-      }, 2000);
+        router.push(process.env.NEXT_PUBLIC_HOST)
+      }, 4000);
     } else {
       toast.error('Invalid Credentials.', {
         position: "top-left",
@@ -79,7 +87,7 @@ const Login = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex min-h-full items-center justify-center py-7 px-4 sm:px-6 lg:px-8 h-screen">
         <div className="w-full max-w-md space-y-8">
           <div>
             {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> */}
