@@ -214,7 +214,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                 <div className="space-y-6 border-t border-gray-200 py-6 px-4">
                   {navigation.pages.map((page) => (
                      <div key={page.name} className="flow-root">
-                     <Link href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
+                     <Link href={page.href} className="-m-2 block p-2 font-blod text-gray-900 ">
                        {page.name}
                      </Link>
                    </div>
@@ -374,7 +374,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                      <Link
                      key={page.name}
                      href={page.href}
-                     className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                     className="flex items-center text-sm font-bold text-gray-700 hover:text-gray-800"
                    >
                      {page.name}
                    </Link>
