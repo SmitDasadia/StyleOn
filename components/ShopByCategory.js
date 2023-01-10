@@ -1,69 +1,72 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
+import Link from "next/link";
 
 export default function ShopByCategory() {
     const callouts = [
         {
             name: 'T-Shirts',
-          
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg',
+            imageSrc: 'https://th.bing.com/th/id/OIP.3FFPgpBF2Lqz9ICfuM9B8wHaJ4?pid=ImgDet&w=600&h=800&rs=1',
             imageAlt: 'TShirts',
-            href: '#',
+            href: '/tshirts',
         },
         {
-            name: 'Self-Improvement',
-            description: 'Journals and note-taking',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg',
-            imageAlt: 'Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant.',
-            href: '#',
+            name: 'SportsWear',
+            imageSrc: 'https://th.bing.com/th/id/OIP.p18KhU6maH2pJCZc9rri3wAAAA?pid=ImgDet&rs=1',
+            imageAlt: 'SportsWear',
+            href: '/sportswear',
         },
         {
-            name: 'Travel',
-            description: 'Daily commute essentials',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
-            imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-            href: '#',
+            name: 'Shorts',
+            imageSrc: 'https://i.pinimg.com/originals/dc/a5/25/dca525d33937b80ea4d1dce6c9806f3f.jpg',
+            imageAlt: 'Shorts',
+            href: '/shorts',
         },
         {
-            name: 'Travel',
-            description: 'Daily commute essentials',
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg',
-            imageAlt: 'Collection of four insulated travel bottles on wooden shelf.',
-            href: '#',
+            name: 'Ethnix',
+            imageSrc: 'https://th.bing.com/th/id/OIP.J844tuPuj1_aDQIFKLyh7AHaLH?pid=ImgDet&w=576&h=864&rs=1',
+            imageAlt: 'Ethnix',
+            href: '/ethnix',
         },
-    ]
+
+    ]   
     return (
         <>
-
-            
-            <div className="">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="mx-auto max-w-2xl py-10 sm:py-24 lg:max-w-none lg:py-32">
-                        <h2 className="text-2xl font-bold text-gray-900 text-center">SHOP BY CATEGORIES</h2>
-
-                        <div className="mt-6 space-y-2 lg:grid lg:grid-cols-4 lg:gap-x-1 lg:space-y-0 py-3">
-                            {callouts.map((callout) => (
-                                <div key={callout.name} className="group relative">
-                                    <div className="relative h-60 w-56 overflow-hidden rounded-lg bg-white group-hover:opacity-75 sm:aspect-w-2 sm:aspect-h-1 sm:h-64 lg:aspect-w-1 lg:aspect-h-1">
-                                        <img
-                                            src={callout.imageSrc}
-                                            alt={callout.imageAlt}
-                                            className="h-full w-full object-cover object-center"
-                                        />
-                                    </div>
-                                    <h3 className="mt-6 text-sm text-gray-500">
-                                        <a href={callout.href}>
-                                            <span className="absolute flex inset-0 justify-center text-center" />
-                                            {callout.name}
+            <section className="py-24 ">
+                <div className="container px-4 mx-auto">
+                    <div className="text-center mb-16">
+                        <h1 className="font-heading text-4xl font-bold">Shop By Category</h1>
+                    </div>
+                    <div className="max-w-sm md:max-w-2xl xl:max-w-6xl mx-auto">
+                        <div className="flex flex-wrap -mx-4 -mb-8">
+                            {callouts.map((callouts) => (
+                                <Link href={callouts.href} key={callouts.name} legacyBehavior>
+                                    <div className="w-full md:w-1/2 xl:w-1/4 px-4 mb-8">
+                                        <a className="group block relative" href="#">
+                                            <div className="relative h-96 mb-3">
+                                                <img className="w-full h-full mb-3 border-2 rounded-md" src={callouts.imageSrc} alt={callouts.imageAlt} />
+                                            </div>
+                                            <div className="text-center">
+                                                <h3 className="font-bold   mb-1 transition duration-300">{callouts.name}</h3>
+                                            </div>
                                         </a>
-                                    </h3>
-                                    
-                                </div>
+                                    </div>
+                                </Link>
+
                             ))}
+
+
+
+
+
+
                         </div>
                     </div>
+
+
+
                 </div>
-            </div>
+            </section>
         </>
     );
 }

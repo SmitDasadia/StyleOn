@@ -87,8 +87,8 @@ const Login = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="flex min-h-full items-center justify-center py-7 px-4 sm:px-6 lg:px-8 h-screen">
-        <div className="w-full max-w-md space-y-8">
+      <div className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8 py-5">
+        <div className="w-full max-w-md space-y-2 py-3">
           <div>
             {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> */}
             <h2 className="mt-6 text-center text-5xl font-bold tracking-tight text-gray-900">Login</h2>

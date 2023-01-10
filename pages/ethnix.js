@@ -87,7 +87,7 @@ export async function getServerSideProps(context) {
       family: 4,
     })
   }
-  let products = await Product.find({ category: "Bundi" })
+  let products = await Product.find({ category: "Ethnix" })
   let bundi = {}
   for (let item of products) {
     if (item.title in bundi) {

@@ -30,8 +30,8 @@ const Footer = () => {
                 <Link href={'/sportswear'} legacyBehavior>
                   <a className="text-gray-600 hover:text-gray-800"><li>Sportswear</li></a>
                 </Link>
-                <Link href={'/bundi'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-gray-800"><li>Bundi</li></a>
+                <Link href={'/ethnix'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Ethnix</li></a>
                 </Link>
               </nav>
             </div>

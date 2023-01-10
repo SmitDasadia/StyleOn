@@ -5,7 +5,6 @@ const handler = async (req, res) => {
     if (req.method == 'POST') {
         for (let i = 0; i < req.body.length; i++) {
             let p = new Product({
-                product_id: req.body[i].product_id,
                 title: req.body[i].title,
                 slug: req.body[i].slug,
                 desc: req.body[i].desc,

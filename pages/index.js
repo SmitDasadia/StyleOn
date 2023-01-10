@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Benifits from "../components/Benifits";
-import BestSeller from "../components/BestSeller";
+import BestSeller from "../components/Trending";
 import ShopByCategory from "../components/ShopByCategory";
-
 import styles from "../styles/Home.module.css";
-import BannerSlider from "./BannerSlider";
+import BannerSlider from "../components/BannerSlider";
+import Trending from "../components/Trending";
 
 export default function Home() {
   return (
@@ -22,7 +22,7 @@ export default function Home() {
 
         {/* bestseller */}
 
-        <BestSeller/>
+        <Trending/>
 
         {/* shopbycategory */}
 

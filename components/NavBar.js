@@ -82,7 +82,7 @@ const navigation = {
     { name: 'Tshirt', href: '/tshirts' },
     { name: 'SportsWear', href: '/sportswear' },
     { name: 'Shorts', href: '/shorts' },
-    { name: 'Bundi', href: '/bundi' },
+    { name: 'Ethnix', href: '/ethnix' },
   ],
 }
 
@@ -213,11 +213,11 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
 
                 <div className="space-y-6 border-t border-gray-200 py-6 px-4">
                   {navigation.pages.map((page) => (
-                     <div key={page.name} className="flow-root">
-                     <Link href={page.href} className="-m-2 block p-2 font-blod text-gray-900 ">
-                       {page.name}
-                     </Link>
-                   </div>
+                    <div key={page.name} className="flow-root">
+                      <Link href={page.href} className="-m-2 block p-2 font-blod text-gray-900 ">
+                        {page.name}
+                      </Link>
+                    </div>
                   ))}
                 </div>
 
@@ -271,16 +271,31 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
               </button>
 
               {/* Logo */}
-              <div className="ml-4 flex mx-auto justify-center lg:ml-0 sm:mx-auto">
-                <a href="#">
-                  <span className="sr-only">Style.com</span>
-                  <img
-                    className="h-8 w-auto"
-                    src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351"
-                    alt="Style.com"
-                  />
-                </a>
-              </div>
+              <Link href='/' legacyBehavior>
+                <div className="ml-4 flex lg:ml-0  mx-auto justify-center items-center cursor-pointer">
+                  <a>
+                    <img
+                      className="h-8 w-auto"
+                      src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351"
+                      alt="Style.com"
+                    />
+                  </a>
+                </div>
+
+              </Link>
+
+              {/* <Link href='/' legacyBehavior>
+                <div className="ml-4 flex mx-auto justify-center items-center lg:ml-0 sm:mx-auto cursor-pointer md:items-start">
+                  <a>
+                    <span className="sr-only">Style.com</span>
+                    <img
+                      className="h-6"
+                      src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351"
+                      alt="Style.com"
+                    />
+                  </a>
+                </div>
+              </Link> */}
 
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
@@ -371,13 +386,13 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                   ))}
 
                   {navigation.pages.map((page) => (
-                     <Link
-                     key={page.name}
-                     href={page.href}
-                     className="flex items-center text-sm font-bold text-gray-700 hover:text-gray-800"
-                   >
-                     {page.name}
-                   </Link>
+                    <Link
+                      key={page.name}
+                      href={page.href}
+                      className="flex items-center mx-auto justify-center text-center text-sm font-bold text-gray-700 hover:text-gray-800 md:items-center"
+                    >
+                      {page.name}
+                    </Link>
                   ))}
                 </div>
               </Popover.Group>
@@ -447,9 +462,9 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
 
                 {/* Cart */}
                 {!user.value && <Link href={'/login'} legacyBehavior>
-                  <a><HiOutlineUser className='text-xl md:text-2xl mx-2 my-1' /></a>
+                  <a><HiOutlineUser className='text-xl md:text-2xl mx-1 my-1' /></a>
                 </Link>}
-                <div className="ml-4 flow-root lg:ml-6">
+                <div className="ml-1 flow-root lg:ml-6">
                   <button onClick={toogleCart} className="group -m-2 flex items-center p-2 text-xl md:text-2xl">
                     <BsHandbag
                       className="h-6 w-6 flex-shrink-0"
