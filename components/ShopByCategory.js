@@ -41,15 +41,15 @@ export default function ShopByCategory() {
                         <div className="flex flex-wrap -mx-4 -mb-8">
                             {callouts.map((callouts) => (
                                 <Link href={callouts.href} key={callouts.name} legacyBehavior>
-                                    <div className="w-full md:w-1/2 xl:w-1/4 px-4 mb-8">
-                                        <a className="group block relative" href="#">
-                                            <div className="relative h-96 mb-3">
-                                                <img className="w-full h-full mb-3 border-2 rounded-md" src={callouts.imageSrc} alt={callouts.imageAlt} />
+                                    <div className="w-full md:w-1/4 xl:w-1/4 sm:w-2/4 px-4 mb-8 cursor-pointer">
+                                        <div className="group block relative">
+                                            <div className="relative h-96 w-auto mb-3">
+                                                <img className="w-full h-full mb-3" src={callouts.imageSrc} alt={callouts.imageAlt} />
                                             </div>
                                             <div className="text-center">
                                                 <h3 className="font-bold   mb-1 transition duration-300">{callouts.name}</h3>
                                             </div>
-                                        </a>
+                                        </div>
                                     </div>
                                 </Link>
 

@@ -47,7 +47,7 @@ const Trending = () => {
 
                         {trending.map((trending) => (
                             <Link href={trending.href} key={trending.title} legacyBehavior>
-                                <div  className="lg:w-1/4 md:w-3/4 p-4 w-full border rounded-md cursor-pointer shadow-lg m-5">
+                                <div  className="lg:w-1/4 md:w-1/4 sm:w-1/4 w-full p-4 cursor-pointer  m-5">
                                     <a className="block relative rounded overflow-hidden">
                                         <img alt={trending.imageSrc} className="m-auto block h-[50vh] md:h-[45vh]" src={trending.imageSrc} />
                                     </a>

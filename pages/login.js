@@ -87,7 +87,7 @@ const Login = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="flex min-h-screen items-center justify-center px-4 sm:px-6 lg:px-8 py-5">
+      <div className="flex min-h-full items-center justify-center py-28 px-4 sm:px-6 lg:px-8 ">
         <div className="w-full max-w-md space-y-2 py-3">
           <div>
             {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> */}
@@ -105,12 +105,12 @@ const Login = () => {
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label className="block mb-4">
-                  <label htmlFor='email' className="mb-2 text-gray-900 font-semibold leading-normal">Email Address *</label>
-                  <input value={email} onChange={handleChange} className="px-4 py-3.5 w-full  font-medium placeholder-gray-400  bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg" id="email" type="email" placeholder="Enter email address" name='email' />
+                  
+                  <input value={email} onChange={handleChange} className=" w-full   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="email" type="email" placeholder="Enter email address" name='email' />
                 </label>
                 <label className="block mb-5">
-                  <label htmlFor='password' className="mb-2 text-gray-900 font-semibold leading-normal">Password *</label>
-                  <input value={password} onChange={handleChange} className="px-4 py-3.5 w-full  font-medium placeholder-gray-400  bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg" id="password" type="password" placeholder="********" name='password' />
+                  
+                  <input value={password} onChange={handleChange} className="w-full   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="password" type="password" placeholder="Enter Password" name='password' />
                 </label>
 
               </div>
@@ -133,8 +133,10 @@ const Login = () => {
               </div>
             </div>
 
+            
+
             <div>
-              <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+              <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#111] py-2 px-4 text-sm font-medium text-white hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                 <span className="absolute inset-y-0 left-0 flex items-center pl-3">
                   <HiOutlineLockClosed className="h-5 w-5 text-white group-hover:text-white" />
                 </span>
@@ -144,6 +146,10 @@ const Login = () => {
           </form>
         </div>
       </div>
+
+     
+
+      
     </div>
   )
 }

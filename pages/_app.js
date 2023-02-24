@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadingBar from 'react-top-loading-bar'
 
 function MyApp({ Component, pageProps }) {
+  
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
   const [user, setUser] = useState({ value: null })
@@ -120,7 +121,7 @@ function MyApp({ Component, pageProps }) {
 
   return <>
   <LoadingBar
-      color='black'
+      color='white'
       progress={progress}
       waitingTime={400}
       onLoaderFinished={() => setProgress(0)}

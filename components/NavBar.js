@@ -7,12 +7,8 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react';
-import { BsHandbag, BsTruck } from 'react-icons/Bs';
-import { MdDeleteOutline } from 'react-icons/Md';
-import { HiOutlineUser } from 'react-icons/Hi';
-import { FiUserCheck } from 'react-icons/Fi';
-import { GoThreeBars } from 'react-icons/Go';
-import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
+import { BsTruck } from 'react-icons/Bs';
+import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2,FiX, FiMinus,FiPlus } from 'react-icons/Fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -110,7 +106,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
 
 
   return (
-    <div className="bg-white top-0 z-10">
+    <div className="bg-white top-0 z-10 shadow-md">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -140,11 +136,11 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                 <div className="flex px-4 pt-5 pb-2">
                   <button
                     type="button"
-                    className="-m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
+                    className="-m-2 inline-flex items-center justify-center rounded-md p-2 "
                     onClick={() => setOpen(false)}
                   >
                     <span className="sr-only">Close menu</span>
-                    <IoMdClose className="h-6 w-6" aria-hidden="true" />
+                    <FiX className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
 
@@ -254,28 +250,28 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
       </Transition.Root>
 
       <header className="relative bg-white">
-        <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
+        <p className="flex h-10 items-center justify-center bg-[#111] px-4 text-sm font-bold text-white sm:px-6 lg:px-8">
           Get free delivery on orders over ₹799
         </p>
 
         <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 top-0 z-10 py-2 ">
-          <div className="border-b border-gray-200">
-            <div className="flex h-16 items-center">
+          <div>
+            <div className="flex  items-center">
               <button
                 type="button"
-                className="rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                className="p-2 lg:hidden"
                 onClick={() => setOpen(true)}
               >
-                <span className="sr-only">Open menu</span>
-                <GoThreeBars className="h-6 w-6" aria-hidden="true" />
+               
+                <FiMenu className="h-6 w-6 text-black " aria-hidden="true" />
               </button>
 
               {/* Logo */}
               <Link href='/' legacyBehavior>
-                <div className="ml-4 flex lg:ml-0  mx-auto justify-center items-center cursor-pointer">
+                <div className="ml-2 flex mx-auto justify-center items-center cursor-pointer">
                   <a>
                     <img
-                      className="h-8 w-auto"
+                      className="h-6 w-auto"
                       src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351"
                       alt="Style.com"
                     />
@@ -402,7 +398,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                 <a onClick={() => { setDropDown(true) }} onMouseLeave={() => { setDropDown(false) }}  >
                   {dropdown && <div
                     onClick={() => { setDropDown(true) }} onMouseLeave={() => { setDropDown(false) }}
-                    className="absolute right-5 bg-slate-50 top-24 flex items-center justify-center rounded-md w-52 font-semibold text-sm border py-3 z-50 cursor-pointer">
+                    className="absolute right-10 bg-slate-50 top-24 flex items-center justify-center rounded-md w-52 font-semibold text-sm border py-3 z-50 cursor-pointer">
                     {/* <span  onClick={() => { setDropDown(true) }} className="absolute top-5 right-2 cursor-pointer text-2xl"><IoMdClose /></span> */}
                     <ul>
                       <Link href={'/myaccount'} legacyBehavior>
@@ -424,7 +420,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
 
                   {user.value &&
                     <>
-                      <FiUserCheck className='text-xl md:text-2xl mx-2 my-1 cursor-pointer' />
+                      <FiUserCheck className='text-2xl md:text-2xl mx-7 my-5 cursor-pointer' />
 
                     </>
                   }
@@ -462,18 +458,30 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
 
                 {/* Cart */}
                 {!user.value && <Link href={'/login'} legacyBehavior>
-                  <a><HiOutlineUser className='text-xl md:text-2xl mx-1 my-1' /></a>
+                  <a><FiUser className='text-2xl md:text-2xl mx-5 my-5 cursor-pointer' /></a>
                 </Link>}
-                <div className="ml-1 flow-root lg:ml-6">
+                <button onClick={toogleCart}>
+                  
+                    <FiShoppingBag className='text-2xl md:text-2xl mx-1 my-5 cursor-pointer' />
+                  
+                </button>
+
+                {/* <div className="ml-1 flow-root lg:ml-6">
                   <button onClick={toogleCart} className="group -m-2 flex items-center p-2 text-xl md:text-2xl">
                     <BsHandbag
                       className="h-6 w-6 flex-shrink-0"
                       aria-hidden="true"
                     />
-                    {/* <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span> */}
+                    <FiShoppingBag
+                      className="h-6 w-6 flex-shrink-0"
+                      aria-hidden="true"
+                    />
+
+
+                    <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
                     <span className="sr-only">items in cart, view bag</span>
                   </button>
-                </div>
+                </div> */}
               </div>
 
 
@@ -486,7 +494,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
           <h1 className='font-bold text-3xl text-center'>Your Bag</h1>
           {/* <span className='text-xl md:text-2xl items-center'><CiDeliveryTruck /></span> */}
           <h2 className='flex flex-1 items-center justify-center text-sm py-4'><BsTruck className='text-lg md:text-2xl mx-3' />Free Shipping & Free Returns!</h2>
-          <span onClick={toogleCart} className="absolute top-5 right-2 cursor-pointer text-2xl"><IoMdClose /></span>
+          <span onClick={toogleCart} className="absolute top-5 right-2 cursor-pointer text-2xl"><FiX /></span>
 
 
 
@@ -495,7 +503,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
               <p className='text-center py-20'>Oh no, your bag is empty!</p>
               <div className=" py-6 px-4 sm:px-6 m-4">
                 <div className="mt-6">
-                  <a href={'/'} className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Start Shopping</a>
+                  <a href={'/'} className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Start Shopping</a>
                 </div>
               </div>
 
@@ -526,13 +534,13 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                         <div className="flex flex-1 items-center justify-between text-sm">
                           {/* <IoMdRemove className='cursor-pointer' onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} /><p>Qty:{cart[k].qty}</p><IoMdAdd className='cursor-pointer' onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} /> */}
 
-                          <div className='flex font-semibold items-center justify-centerw-1/3 pt-5'>
-                            <IoMdRemove onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
-                            <p>{cart[k].qty}</p><IoMdAdd onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
+                          <div className='flex font-semibold items-center justify-centerw-1/3 pt-5 text-lg'>
+                            <FiMinus onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
+                            <p>{cart[k].qty}</p><FiPlus onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
                           </div>
 
-                          <div className="flex pt-5">
-                            <button type="button" className="font-medium   hover:text-slate-800" onClick={() => { removeItemFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }}><MdDeleteOutline /></button>
+                          <div className="flex font-semibold pt-5 text-lg">
+                            <button type="button" className=" hover:text-slate-800" onClick={() => { removeItemFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }}><FiTrash2 /></button>
                           </div>
                         </div>
                       </div>
@@ -567,10 +575,10 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
 
                 <div className="mt-6">
-                  <div className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</div>
+                  <div className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</div>
                 </div>
                 <div className="mt-6">
-                  <Link href="/checkout" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>
+                  <Link href="/checkout" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>
                 </div>
               </div>
 

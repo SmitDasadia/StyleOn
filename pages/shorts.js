@@ -16,7 +16,7 @@ const Shorts = ({ products }) => {
               return <Link passHref={true} key={products[item]._id} href={`/product/${products[item].slug}`} legacyBehavior>
                 <div className="lg:w-1/4 md:w-1/2 p-4 w-full border rounded-md cursor-pointer shadow-lg m-5">
                   <a className="block relative rounded overflow-hidden">
-                    <img alt="ecommerce" className="m-auto block h-[50vh]" src={products[item].img} />
+                    <img alt="ecommerce" className="m-auto block  h-[50vh] w-[50vh]" src={products[item].img} />
                   </a>
                   <div className="mt-4 text-center md:text-left">
                     <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
@@ -57,7 +57,7 @@ const Shorts = ({ products }) => {
                     {products[item].size.includes("XXXXXL") && <span className='border border-gray-300 px-1 mx-1'>XXXXXL</span>}
                   </div>
 
-                  <div className='mt-1 text-right text-md'>
+                  <div className='mt-1 text-right text-md font-bold text-black'>
                     <p>₹{products[item].price}</p>
                   </div>
 

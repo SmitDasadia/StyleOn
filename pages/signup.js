@@ -75,11 +75,11 @@ const Signup = () => {
         pauseOnHover
         theme="light"
       />
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 h-screen">
+      <div className="flex min-h-full items-center justify-center py-16 px-4 sm:px-6 lg:px-8 ">
         <div className="w-full max-w-md space-y-8">
           <div>
             {/* <img className="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" /> */}
-            <h2 className="mt-6 text-center text-5xl font-bold tracking-tight text-gray-900">Create an Account</h2>
+            <h2 className="mt-6 text-center text-5xl font-bold tracking-tight text-gray-900 sm:text-3xl md:text-4xl">Create an Account</h2>
             <p className="mt-2 text-center text-sm text-gray-600">
               Or
               <Link href={'/login'} legacyBehavior>
@@ -89,20 +89,20 @@ const Signup = () => {
             </p>
           </div>
           <form onSubmit={handleSubmit} className="mt-8 space-y-6" method="POST">
-            <input type="hidden" name="remember" value="true" />
+            {/* <input type="hidden" name="remember" value="true" /> */}
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label className="block mb-4">
-                  <label htmlFor='name' className="mb-2 text-gray-900 font-semibold leading-normal">Name *</label>
-                  <input value={name} onChange={handleChange} className="px-4 py-3.5 w-full  font-medium placeholder-gray-400  bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg" id="name" type="name" placeholder="Enter your name" name='name' />
+                  <label htmlFor='name' className="mb-5 text-gray-900 font-semibold leading-normal">Name *</label>
+                  <input value={name} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="name" type="name" placeholder="Enter Your Name" name='name' />
                 </label>
                 <label className="block mb-4">
-                  <label htmlFor='email' className="mb-2 text-gray-900 font-semibold leading-normal">Email Address *</label>
-                  <input value={email} onChange={handleChange} className="px-4 py-3.5 w-full  font-medium placeholder-gray-400  bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg" id="email" type="email" placeholder="email" name='email' />
+                  <label htmlFor='email' className="mb-5 text-gray-900 font-semibold leading-normal">Email Address *</label>
+                  <input value={email} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="email" type="email" placeholder="Enter Your Email" name='email' />
                 </label>
                 <label className="block mb-5">
-                  <label htmlFor='password' className="mb-2 text-gray-900 font-semibold leading-normal">Password *</label>
-                  <input value={password} onChange={handleChange} className="px-4 py-3.5 w-full  font-medium placeholder-gray-400  bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg" id="password" type="password" placeholder="********" name='password' />
+                  <label htmlFor='password' className="mb-5 text-gray-900 font-semibold leading-normal">Password *</label>
+                  <input value={password} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="password" type="password" placeholder="********" name='password' />
                 </label>
 
               </div>
@@ -126,10 +126,8 @@ const Signup = () => {
             </div>
 
             <div>
-              <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-black py-2 px-4 text-sm font-medium text-white hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                  <HiOutlineLockClosed className="h-5 w-5 text-white group-hover:text-white" />
-                </span>
+              <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#111] py-2 px-4 text-sm font-medium text-white hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                
                 Create an Account
               </button>
             </div>

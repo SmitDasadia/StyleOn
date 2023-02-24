@@ -13,6 +13,9 @@ import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
 import { MdDeleteOutline } from 'react-icons/Md';
 
 
+import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2,FiX, FiMinus,FiPlus } from 'react-icons/Fi';
+
+
 
 
 const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
@@ -33,45 +36,45 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
         <div className="container p-12 mx-auto ">
             <div className="pb-9 mb-7 text-center border-b border-black border-opacity-5">
-                <h2 className="text-5xl xl:text-4xl leading-normal font-heading font-medium text-center">CheckOut</h2>
+                <h2 className="text-5xl xl:text-4xl leading-normal font-heading font-bold text-center">CheckOut</h2>
             </div>
             <div className="flex flex-col w-full px-0 mx-auto md:flex-col">
 
                 <div className="flex flex-col w-full">
 
-                    <h2 className="mb-4 font-bold md:text-xl text-heading text-center">1. Shipping Address
+                    <h2 className="mb-4 font-bold md:text-xl text-heading text-center py-10">1. Shipping Address
                     </h2>
 
                     <form className="justify-center w-full mx-auto " method="post" action='true'>
                         <div className="">
                             <div className="space-x-0 lg:flex lg:space-x-4">
                                 <div className="w-full lg:w-1/2">
-                                    <label htmlFor='name' className="block mb-3 text-sm font-semibold text-gray-500">Your Name</label>
+                                    <label htmlFor='name' className="block mb-3 text-sm font-semibold ">Your Name</label>
                                     <input placeholder="Your Name" type="text" id='name' name='name'
-                                        className="w-full px-4 py-3 text-sm  bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" />
+                                        className="w-full px-4 py-3 text-sm   border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
 
 
                                 <div className="w-full lg:w-1/2 ">
-                                    <label htmlFor='phonenumber' className="block mb-3 text-sm font-semibold text-gray-500">Phone Number</label>
+                                    <label htmlFor='phonenumber' className="block mb-3 text-sm font-semibold ">Phone Number</label>
                                     <input type="text" id='phonenumber' name='phonenumber' placeholder="Phone Number"
-                                        className="w-full px-4 py-3 text-sm bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" />
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                             </div>
                             <div className="mt-4">
                                 <div className="w-full">
                                     <label htmlFor='email'
-                                        className="block mb-3 text-sm font-semibold text-gray-500">Email</label>
+                                        className="block mb-3 text-sm font-semibold ">Email</label>
                                     <input type="text" id='email' name='email' placeholder="Email"
-                                        className="w-full px-4 py-3 text-sm bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" />
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                             </div>
                             <div className="mt-4">
                                 <div className="w-full">
                                     <label htmlFor='address'
-                                        className="block mb-3 text-sm font-semibold text-gray-500">Address</label>
+                                        className="block mb-3 text-sm font-semibold ">Address</label>
                                     <textarea
-                                        className="w-full px-4 py-3 text-xs lg:text-sm bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl"
+                                        className="w-full px-4 py-3 text-xs lg:text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md"
                                         type="text" id='address' name='address' cols="20" rows="4" placeholder="Address"></textarea>
                                 </div>
                             </div>
@@ -79,30 +82,30 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                             <div className="space-x-0 lg:flex lg:space-x-4">
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='city'
-                                        className="block mb-3 text-sm font-semibold text-gray-500">City</label>
+                                        className="block mb-3 text-sm font-semibold ">City</label>
                                     <input type="text" id='city' name='city' placeholder="City"
-                                        className="w-full px-4 py-3 text-sm bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" />
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='state'
-                                        className="block mb-3 text-sm font-semibold text-gray-500">State</label>
+                                        className="block mb-3 text-sm font-semibold ">State</label>
                                     <input name="state" type="text" id='state' placeholder="State"
-                                        className="w-full px-4 py-3 text-sm bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" />
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                             </div>
 
                             <div className="space-x-0 lg:flex lg:space-x-4 pt-1">
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='country'
-                                        className="block mb-3 text-sm font-semibold text-gray-500">Country</label>
-                                    <input name="country" type="text" placeholder="City" id='country'
-                                        className="w-full px-4 py-3 text-sm bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" />
+                                        className="block mb-3 text-sm font-semibold ">Country</label>
+                                    <input name="country" type="text" placeholder="Country" id='country'
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                                 <div className="w-full lg:w-1/2 ">
                                     <label htmlFor='pincode'
-                                        className="block mb-3 text-sm font-semibold text-gray-500">Pincode</label>
-                                    <input name="pincode" type="text" placeholder="City" id='pincode'
-                                        className="w-full px-4 py-3 text-sm bg-blue-50 border-2 border-blue-400 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" />
+                                        className="block mb-3 text-sm font-semibold ">Pincode</label>
+                                    <input name="pincode" type="text" placeholder="Pincode" id='pincode'
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                             </div>
 
@@ -129,24 +132,24 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
                                                     <div className="ml-4 flex flex-1 flex-col">
                                                         <div>
-                                                            <div className="flex justify-between text-base font-medium text-black-900 sm:text-sm">
+                                                            <div className="flex justify-between text-base font-bold  sm:text-sm">
                                                                 <h3>
-                                                                    <p className='font-blod text-md '>{cart[k].name}</p>
-                                                                    <p className="text-blue-500 font-bold">₹{cart[k].price}</p>
+                                                                    <p className='font-blod text-lg '>{cart[k].name}</p>
+                                                                    <p className="text-blue-500 font-bold text-lg">₹{cart[k].price}</p>
                                                                 </h3>
                                                             </div>
-                                                            <p className="mt-1 text-sm ">{cart[k].size}/{cart[k].variant}</p>
+                                                            <p className="mt-1 text-lg ">{cart[k].size}/{cart[k].variant}</p>
                                                         </div>
-                                                        <div className="flex flex-1 items-center justify-between text-sm">
+                                                        <div className="flex flex-1 items-center justify-between ">
                                                             {/* <IoMdRemove className='cursor-pointer' onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} /><p>Qty:{cart[k].qty}</p><IoMdAdd className='cursor-pointer' onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} /> */}
 
-                                                            <div className='flex font-semibold items-center justify-centerw-1/3 pt-5'>
-                                                                <IoMdRemove onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
-                                                                <p>{cart[k].qty}</p><IoMdAdd onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
+                                                            <div className='flex font-semibold items-center justify-centerw-1/3 pt-5 text-lg'>
+                                                                <FiMinus onClick={() => { removeFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
+                                                                <p>{cart[k].qty}</p><FiPlus onClick={() => { addToCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }} className='cursor-pointer mx-2' />
                                                             </div>
 
-                                                            <div className="flex pt-5">
-                                                                <button type="button" className="font-medium   hover:text-slate-800" onClick={() => { removeItemFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }}><MdDeleteOutline /></button>
+                                                            <div className="flex pt-5 text-lg">
+                                                                <button type="button" className="font-medium   hover:text-slate-800" onClick={() => { removeItemFromCart(k, 1, cart[k].price, cart[k].name, cart[k].size, cart[k].variant, cart[k].img) }}><FiTrash2 /></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -155,16 +158,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                             </div>
                                         </div>
                                     </div>
-                                    {/* <ol>
-              <li key={k}>
-                <div className='item flex my-5'>
-                  <div className='w-2/3 font-semibold'>{cart[k].name}({cart[k].size}/{cart[k].variant})</div>
-                  <div className='flex font-semibold items-center justify-centerw-1/3'>
-                  <IoMdRemove className='cursor-pointer mx-2' /><p>1</p><IoMdAdd className='cursor-pointer mx-2'/>
-                  </div>
-                </div>
-              </li>
-            </ol> */}
+                                    
 
 
 
@@ -179,7 +173,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                     </div>
 
                     <button className="mt-6 p-1 mx-auto ">
-                        <Link href="/order" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Pay ₹{subTotal}</a></Link>
+                        <Link href="/order" legacyBehavior><button className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-2 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Pay ₹{subTotal}</button></Link>
                     </button>
                 </div>
 

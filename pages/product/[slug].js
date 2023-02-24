@@ -34,7 +34,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
     }
     else {
       setService(false)
@@ -47,7 +47,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
+      });
 
     }
   }
@@ -114,7 +114,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
             <a className="hidden sm:block h-30 mb-4 mr-2 sm:mr-0" href="#">
               <img className="h-full w-full" src="uinel-assets/images/ecommerce-product-info/placeholder2.png" alt=""/>
             </a>
-            <a className="hidden sm:block h-30 mb-4 mr-2 sm:mr-0 rounded-xl border-2 border-blueGray-500" href="#">
+            <a className="hidden sm:block h-30 mb-4 mr-2 sm:mr-0 rounded-md border-2 border-blueGray-500" href="#">
               <img className="h-full w-full" src="uinel-assets/images/ecommerce-product-info/placeholder4.png" alt=""/>
             </a>
             <a className="h-30 block mb-4 sm:mb-12 mr-4 sm:mr-0" href="#">
@@ -202,12 +202,16 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                   <button onClick={() => { refershVarint(size, 'Green') }} className="inline-flex items-center justify-center p-1 rounded-full">
                     <div className="w-6 h-6 rounded-full bg-green-600"></div>
                   </button>}
+                {Object.keys(variants).includes('Aqua') && Object.keys(variants['Aqua']).includes(size) &&
+                  <button onClick={() => { refershVarint(size, 'Aqua') }} className="inline-flex items-center justify-center p-1 rounded-full">
+                    <div className="w-6 h-6 rounded-full bg-blue-400"></div>
+                  </button>}
 
               </div>
 
               <div className="Size mb-10">
                 <h4 className="mb-3 font-heading font-medium">Size:</h4>
-                {/* <select onChange={(e) => { refershVarint(e.target.value, color) }} className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
+                {/* <select onChange={(e) => { refershVarint(e.target.value, color) }} className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md">
 
                   {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
                   {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
@@ -216,7 +220,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                   {Object.keys(variants[color]).includes('XXL') && <option value={'XXL'}>XXL</option>}
                 </select> */}
 
-                <select value={size} onChange={(e) => { refershVarint(e.target.value, color) }} className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl">
+                <select value={size} onChange={(e) => { refershVarint(e.target.value, color) }} className="w-24 px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md">
                   {Object.keys(variants[color]).includes('S') && <option value={'S'}>S</option>}
                   {Object.keys(variants[color]).includes('M') && <option value={'M'}>M</option>}
                   {Object.keys(variants[color]).includes('L') && <option value={'L'}>L</option>}
@@ -237,8 +241,8 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
 
               <div className="pincode mb-10">
                 <h4 className="mb-3 font-heading font-medium">Pincode:</h4>
-                <input onChange={onChangePinCode} className=" px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-xl" type="text" placeholder="Enter Your Pincode" /> <button
-                  className="bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-xl" onClick={checkPincode}>
+                <input onChange={onChangePinCode} className=" px-3 py-2 text-center bg-white border-2 border-blue-500 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" type="text" placeholder="Enter Your Pincode" /> <button
+                  className="bg-[#111] hover:bg-slate-900 text-white font-bold py-2 px-4 rounded-md" onClick={checkPincode}>
                   Check
                 </button>
                 {/* {service && service != null && <div className="text-green-800">This Pincode is Servivceable!</div>}
@@ -247,16 +251,16 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
               <div className="flex flex-wrap -mx-2 mb-12">
                 <button onClick={() => { buyNow(slug, 1, product.price, product.title, size, color, product.img) }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
 
-                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer">BuyNow</a>
+                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-[#111] focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-gray-600 rounded-md  cursor-pointer">BuyNow</a>
 
                 </button>
 
                 <button className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
-                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-black focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-slate-900 rounded-xl cursor-pointer"
+                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-[#111] focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-gray-600 rounded-md cursor-pointer"
                     onClick={() => { addToCart(slug, 1, product.price, product.title, size, color, product.img) }}>Add to Bag</a>
                 </button>
                 {/* <div className="w-full md:w-1/3 px-2">
-                  <a className="flex w-full py-4 px-2 items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-white focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-xl" href="#">
+                  <a className="flex w-full py-4 px-2 items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-white focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-md" href="#">
                     <span className="mr-2">Wishlist</span>
                     <svg width="23" height="22" viewbox="0 0 23 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M11.3235 20.1324L2.52488 10.8515C1.75232 10.0706 1.24237 9.06367 1.06728 7.97339C0.8922 6.88311 1.06086 5.76477 1.54936 4.7768V4.7768C1.91837 4.03089 2.45739 3.3843 3.12201 2.89033C3.78663 2.39635 4.55781 2.06911 5.37203 1.93558C6.18626 1.80205 7.0202 1.86605 7.80517 2.1223C8.59013 2.37855 9.30364 2.81972 9.88691 3.40946L11.3235 4.86204L12.7601 3.40946C13.3434 2.81972 14.0569 2.37855 14.8419 2.1223C15.6269 1.86605 16.4608 1.80205 17.275 1.93558C18.0892 2.06911 18.8604 2.39635 19.525 2.89033C20.1897 3.3843 20.7287 4.03089 21.0977 4.7768V4.7768C21.5862 5.76477 21.7549 6.88311 21.5798 7.97339C21.4047 9.06367 20.8947 10.0706 20.1222 10.8515L11.3235 20.1324Z" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"></path>
@@ -324,11 +328,11 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                       </button>
                     </div>
                     <div className={"pt-4 text-base leading-normal pr-12 mt-4 text-gray-600 " + (show2 ? "block" : "hidden")} id="sect">
-                    You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are nonrefundable
+                      You will be responsible for paying for your own shipping costs for returning your item. Shipping costs are nonrefundable
                     </div>
                   </div>
                 </div>
-               
+
               </div>
             </div>
           </div>
