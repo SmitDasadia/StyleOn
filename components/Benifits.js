@@ -3,7 +3,7 @@ import React from 'react'
 const Benifits = () => {
   const benifits = [
     {
-      name: 'Free Delivery',
+      name: 'Free & Fastest Delivery',
       icon: 'https://th.bing.com/th/id/OIP.3FFPgpBF2Lqz9ICfuM9B8wHaJ4?pid=ImgDet&w=600&h=800&rs=1',
     },
     {
@@ -15,7 +15,7 @@ const Benifits = () => {
       icon: 'https://th.bing.com/th/id/OIP.3FFPgpBF2Lqz9ICfuM9B8wHaJ4?pid=ImgDet&w=600&h=800&rs=1',
     },
     {
-      name: 'Easy Return',
+      name: 'Easy Return Policy',
       icon: 'https://th.bing.com/th/id/OIP.3FFPgpBF2Lqz9ICfuM9B8wHaJ4?pid=ImgDet&w=600&h=800&rs=1',
     },
   ]
@@ -34,7 +34,7 @@ const Benifits = () => {
                     <path d="M8 17l4 4 4-4m-4-5v9"></path>
                     <path d="M20.88 18.09A5 5 0 0018 9h-1.26A8 8 0 103 16.29"></path>
                   </svg>
-                  <h2 className="title-font font-bold text-2xl text-gray-900">{benifits.name}</h2>
+                  <h2 className="title-font font-bold text-xl text-gray-900">{benifits.name}</h2>
 
                 </div>
               </div>

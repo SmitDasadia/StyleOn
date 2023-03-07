@@ -2,10 +2,9 @@
 import Head from "next/head";
 import Benifits from "../components/Benifits";
 import Offers from "../components/offers";
-import BestSeller from "../components/Trending";
+import BestSeller from "../components/BestSelling";
 import ShopByCategory from "../components/ShopByCategory";
 import styles from "../styles/Home.module.css";
-import Trending from "../components/Trending";
 import Carousel from "../components/Carousel";
 
 export default function Home() {
@@ -25,7 +24,7 @@ export default function Home() {
 
         {/* trending */}
 
-        <Trending />
+        <BestSeller />
 
        
 
@@ -40,7 +39,7 @@ export default function Home() {
          <Offers />
         {/* benifits */}
 
-        {/* <Benifits /> */}
+        <Benifits />
 
 
 

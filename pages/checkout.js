@@ -11,30 +11,71 @@ import { useRef } from 'react';
 import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
 // import { RiSecurePaymentLine } from 'react-icons/Ri';
 import { MdDeleteOutline } from 'react-icons/Md';
+import Head from 'next/head';
+import Script from 'next/script';
 
 
-import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2,FiX, FiMinus,FiPlus } from 'react-icons/Fi';
+import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2, FiX, FiMinus, FiPlus } from 'react-icons/Fi';
 
 
 
 
 const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
-    const ref = useRef()
-    const toogleCart = () => {
-        if (ref.current.classList.contains('translate-x-full')) {
-            ref.current.classList.remove('translate-x-full')
-            ref.current.classList.add('translate-x-0')
-        }
-        else if (!ref.current.classList.contains('translate-x-full')) {
-            ref.current.classList.remove('translate-x-0')
-            ref.current.classList.add('translate-x-full')
-        }
 
+    const initiatePayment = async () => {
+        let orderId = Math.floor(Math.random() * Date.now())
+
+        const data = { cart, subTotal, orderId, email: "emmail" };
+
+        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+
+        let txnToken = await a.json();
+        console.log(txnToken);
+
+
+
+
+        function onScriptLoad() {
+            var config = {
+                "root": "",
+                "flow": "DEFAULT",
+                "data": {
+                    "orderId": orderId, /* update order id */
+                    "token": txnToken, /* update token value */
+                    "tokenType": "TXN_TOKEN",
+                    "amount": subtotal /* update amount */
+                },
+                "handler": {
+                    "notifyMerchant": function (eventName, data) {
+                        console.log("notifyMerchant handler function called");
+                        console.log("eventName => ", eventName);
+                        console.log("data => ", data);
+                    }
+                }
+            };
+
+            window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                // after successfully updating configuration, invoke JS Checkout
+                window.Paytm.CheckoutJS.invoke();
+            }).catch(function onError(error) {
+                console.log("error => ", error);
+            });
+        }
     }
+
 
     return (
 
         <div className="container p-12 mx-auto ">
+            <Head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></Head>
+            <Script type="application/javascript" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`}  ></Script>
+
             <div className="pb-9 mb-7 text-center border-b border-black border-opacity-5">
                 <h2 className="text-5xl xl:text-4xl leading-normal font-heading font-bold text-center">CheckOut</h2>
             </div>
@@ -158,7 +199,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                             </div>
                                         </div>
                                     </div>
-                                    
+
 
 
 
@@ -166,15 +207,15 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                             })}
                         </ol>
                         <div className="py-5 flex items-center justify-center text-lg font-bold text-gray-900">
-                            <p>Subtotal  ₹{subTotal}</p>
-                           
+                            <button >Subtotal  ₹{subTotal}</button>
+
                         </div>
 
                     </div>
 
-                    <button className="mt-6 p-1 mx-auto ">
-                        <Link href="/order" legacyBehavior><button className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-2 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Pay ₹{subTotal}</button></Link>
-                    </button>
+                    <div className="mt-6 p-1 mx-auto ">
+                        <button onClick={initiatePayment} className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-2 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Pay ₹{subTotal}</button>
+                    </div>
                 </div>
 
 
