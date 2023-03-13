@@ -109,7 +109,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
     <div className="bg-white top-0 z-10 shadow-md">
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
-        <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
+        <Dialog as="div" className="relative z-50 lg:hidden" onClose={setOpen}>
           <Transition.Child
             as={Fragment}
             enter="transition-opacity ease-linear duration-300"
@@ -122,7 +122,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
 
-          <div className="fixed inset-0 z-40 flex">
+          <div className="fixed inset-0 z-50 flex">
             <Transition.Child
               as={Fragment}
               enter="transition ease-in-out duration-300 transform"
@@ -402,9 +402,9 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                     {/* <span  onClick={() => { setDropDown(true) }} className="absolute top-5 right-2 cursor-pointer text-2xl"><IoMdClose /></span> */}
                     <ul>
                       <Link href={'/myaccount'} legacyBehavior>
-                        <li className='px-3 py-3 hover:text-blue-800'>My Account</li>
+                        <li className='px-3 py-3 hover:text-blue-800'>Account</li>
                       </Link>
-                      <Link href={'/orders'} legacyBehavior>
+                      <Link href={'/myOrders'} legacyBehavior>
                         <li className='px-3 py-3 hover:text-blue-800'>Orders</li>
                       </Link>
                       <div className='px-3 py-3 '>

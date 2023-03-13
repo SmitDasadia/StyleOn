@@ -5,6 +5,7 @@ import Product from '../models/Product';
 const mongoose = require('mongoose');
 
 const Tshirts = ({ products }) => {
+  console.log(typeof products)
   return (
     <div>
       <section className="text-gray-600 body-font ">

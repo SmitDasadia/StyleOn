@@ -105,12 +105,14 @@ const Login = () => {
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <label className="block mb-4">
+                  <label htmlFor='email' className="mb-5 text-gray-900 font-semibold leading-normal">Email Address </label>
                   
-                  <input value={email} onChange={handleChange} className=" w-full   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="email" type="email" placeholder="Enter email address" name='email' />
+                  <input value={email} onChange={handleChange} className=" w-full   bg-white rounded border border-gray-300 focus:border-[#111] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="email" type="email" placeholder="Enter email address" name='email' />
                 </label>
                 <label className="block mb-5">
+                <label htmlFor='password' className="mb-5 text-gray-900 font-semibold leading-normal">Password</label>
                   
-                  <input value={password} onChange={handleChange} className="w-full   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="password" type="password" placeholder="Enter Password" name='password' />
+                  <input value={password} onChange={handleChange} className="w-full   bg-white rounded border border-gray-300 focus:border-[#111] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="password" type="password" placeholder="Enter Password" name='password' />
                 </label>
 
               </div>
@@ -128,9 +130,9 @@ const Login = () => {
           <label for="remember-me" className="ml-2 block text-sm text-gray-900">Remember me</label>
         </div> */}
 
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">Forgot your password?</a>
-              </div>
+              </div> */}
             </div>
 
             

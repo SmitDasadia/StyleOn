@@ -94,15 +94,15 @@ const Signup = () => {
               <div>
                 <label className="block mb-4">
                   <label htmlFor='name' className="mb-5 text-gray-900 font-semibold leading-normal">Name *</label>
-                  <input value={name} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="name" type="name" placeholder="Enter Your Name" name='name' />
+                  <input value={name} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-[#111] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="name" type="name" placeholder="Enter Your Name" name='name' />
                 </label>
                 <label className="block mb-4">
                   <label htmlFor='email' className="mb-5 text-gray-900 font-semibold leading-normal">Email Address *</label>
-                  <input value={email} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="email" type="email" placeholder="Enter Your Email" name='email' />
+                  <input value={email} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-[#111] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="email" type="email" placeholder="Enter Your Email" name='email' />
                 </label>
                 <label className="block mb-5">
                   <label htmlFor='password' className="mb-5 text-gray-900 font-semibold leading-normal">Password *</label>
-                  <input value={password} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="password" type="password" placeholder="********" name='password' />
+                  <input value={password} onChange={handleChange} className=" w-full  font-medium placeholder-gray-400   bg-white rounded border border-gray-300 focus:border-[#111] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="password" type="password" placeholder="********" name='password' />
                 </label>
 
               </div>
