@@ -40,8 +40,8 @@ function MyApp({ Component, pageProps }) {
     if (token) {
       setUser({ value: token })
       // setuserName({value: token.name})
-      setKey(Math.random())
     }
+    setKey(Math.random())
   }, [router.query])
 
 
@@ -94,8 +94,8 @@ function MyApp({ Component, pageProps }) {
   }
 
   const buyNow = (itemCode, qty, price, name, size, variant, img) => {
-    saveCart({})
-    let newCart = { itemCode: { qty: 1, price, name, size, variant, img } };
+    let newCart = {}
+    newCart[itemCode] = { qty: 1, price, name, size, variant, img };
     setCart(newCart)
     saveCart(newCart)
 
@@ -127,7 +127,7 @@ function MyApp({ Component, pageProps }) {
       onLoaderFinished={() => setProgress(0)}
     />
    
-     <NavBar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} removeItemFromCart={removeItemFromCart} buyNow={buyNow} />
+     {key && <NavBar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} removeItemFromCart={removeItemFromCart} buyNow={buyNow} />}
       
     <ToastContainer
       position="top-left"

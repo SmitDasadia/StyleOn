@@ -113,21 +113,21 @@ const myaccount = () => {
                             <div className="space-x-0 lg:flex lg:space-x-4 pt-1">
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='currentPassword'
-                                        className="block mb-3 text-sm font-semibold ">currentPassword</label>
+                                        className="block mb-3 text-sm font-semibold "> Current Password</label>
                                     <input name="currentPassword" type="password" placeholder="currentPassword" id='currentPassword'
-                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" autoComplete="off"/>
                                 </div>
                                 <div className="w-full lg:w-1/2 ">
                                     <label htmlFor='newPassword'
                                         className="block mb-3 text-sm font-semibold ">New Password</label>
                                     <input name="newPassword" type="password" placeholder="newPassword" id='newPassword'
-                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" autoComplete="off" />
                                 </div>
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='confirmPassword'
                                         className="block mb-3 text-sm font-semibold ">confirmPassword</label>
                                     <input name="confirmPassword" type="password" placeholder="confirmPassword" id='confirmPassword'
-                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" autoComplete="off"/>
                                 </div>
                             </div>
 

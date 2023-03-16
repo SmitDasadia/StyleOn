@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 /* eslint-disable @next/next/no-css-tags */
-import React from 'react'
+import React, { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react';
@@ -15,17 +15,62 @@ import Head from 'next/head';
 import Script from 'next/script';
 
 
-import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2, FiX, FiMinus, FiPlus } from 'react-icons/Fi';
+import { FiTrash2, FiMinus, FiPlus } from 'react-icons/Fi';
 
 
 
 
 const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
 
+    const [name, setName] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [phone, setPhone] = useState(null)
+    const [address, setAdress] = useState(null)
+    const [city, setCity] = useState(null)
+    const [state, setState] = useState(null)
+    const [country, setCountry] = useState(null)
+    const [pincode, setPincode] = useState(null)
+    const [disabled, setDisabled] = useState(true)
+
+
+    const handleChange = (e) => {
+        if (e.target.name == 'name') {
+            setName(e.target.value)
+        }
+        else if (e.target.name == 'email') {
+            setEmail(e.target.value)
+        }
+        else if (e.target.name == 'phone') {
+            setPhone(e.target.value)
+        }
+        else if (e.target.name == 'address') {
+            setAdress(e.target.value)
+        }
+        else if (e.target.name == 'city') {
+            setCity(e.target.value)
+        }
+        else if (e.target.name == 'state') {
+            setState(e.target.value)
+        }
+        else if (e.target.name == 'country') {
+            setCountry(e.target.value)
+        }
+        else if (e.target.name == 'pincode') {
+            setPincode(e.target.value)
+        }
+        if (name && email && phone && address && city && state && country && pincode) {
+            setDisabled(false)
+        }
+
+    }
+
+
+   
+
     const initiatePayment = async () => {
         let orderId = Math.floor(Math.random() * Date.now())
 
-        const data = { cart, subTotal, orderId, email: "emmail" };
+        const data = { cart, subTotal, orderId, email: email, name , address, pincode, phone };
 
         let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
             method: 'POST', // or 'PUT'
@@ -49,7 +94,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                     "orderId": orderId, /* update order id */
                     "token": txnToken, /* update token value */
                     "tokenType": "TXN_TOKEN",
-                    "amount": subtotal /* update amount */
+                    "amount": subTotal /* update amount */
                 },
                 "handler": {
                     "notifyMerchant": function (eventName, data) {
@@ -86,19 +131,19 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                     <h2 className="mb-4 font-bold md:text-xl text-heading text-center py-10">1. Shipping Address
                     </h2>
 
-                    <form className="justify-center w-full mx-auto " method="post" action='true'>
+                    <form className="justify-center w-full mx-auto " method="POST" action='true'>
                         <div className="">
                             <div className="space-x-0 lg:flex lg:space-x-4">
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='name' className="block mb-3 text-sm font-semibold ">Your Name</label>
-                                    <input placeholder="Your Name" type="text" id='name' name='name'
+                                    <input value={name} onChange={handleChange} placeholder="Your Name" type="text" id='name' name='name'
                                         className="w-full px-4 py-3 text-sm   border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
 
 
                                 <div className="w-full lg:w-1/2 ">
                                     <label htmlFor='phonenumber' className="block mb-3 text-sm font-semibold ">Phone Number</label>
-                                    <input type="text" id='phonenumber' name='phonenumber' placeholder="Phone Number"
+                                    <input value={phone} onChange={handleChange} type="text" id='phonenumber' name='phone' placeholder="Phone Number"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                             </div>
@@ -106,7 +151,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                 <div className="w-full">
                                     <label htmlFor='email'
                                         className="block mb-3 text-sm font-semibold ">Email</label>
-                                    <input type="text" id='email' name='email' placeholder="Email"
+                                    <input value={email} onChange={handleChange} type="text" id='email' name='email' placeholder="Email"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                             </div>
@@ -115,39 +160,44 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                     <label htmlFor='address'
                                         className="block mb-3 text-sm font-semibold ">Address</label>
                                     <textarea
+                                        value={address} onChange={handleChange}
                                         className="w-full px-4 py-3 text-xs lg:text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md"
                                         type="text" id='address' name='address' cols="20" rows="4" placeholder="Address"></textarea>
                                 </div>
                             </div>
 
+                           
+
                             <div className="space-x-0 lg:flex lg:space-x-4">
+                            <div className="w-full lg:w-1/2 ">
+                                    <label htmlFor='pincode'
+                                        className="block mb-3 text-sm font-semibold ">Pincode</label>
+                                    <input value={pincode} onChange={handleChange} name="pincode" type="text" placeholder="Pincode" id='pincode'
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
+                                </div>
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='city'
                                         className="block mb-3 text-sm font-semibold ">City</label>
-                                    <input type="text" id='city' name='city' placeholder="City"
+                                    <input value={city} onChange={handleChange} type="text" id='city' name='city' placeholder="City"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
-                                <div className="w-full lg:w-1/2">
-                                    <label htmlFor='state'
-                                        className="block mb-3 text-sm font-semibold ">State</label>
-                                    <input name="state" type="text" id='state' placeholder="State"
-                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
-                                </div>
+                                
                             </div>
 
                             <div className="space-x-0 lg:flex lg:space-x-4 pt-1">
+                            <div className="w-full lg:w-1/2">
+                                    <label htmlFor='state'
+                                        className="block mb-3 text-sm font-semibold ">State</label>
+                                    <input value={state} onChange={handleChange} name="state" type="text" id='state' placeholder="State"
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
+                                </div>
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='country'
                                         className="block mb-3 text-sm font-semibold ">Country</label>
-                                    <input name="country" type="text" placeholder="Country" id='country'
+                                    <input value={country} onChange={handleChange} name="country" type="text" placeholder="Country" id='country'
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
-                                <div className="w-full lg:w-1/2 ">
-                                    <label htmlFor='pincode'
-                                        className="block mb-3 text-sm font-semibold ">Pincode</label>
-                                    <input name="pincode" type="text" placeholder="Pincode" id='pincode'
-                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
-                                </div>
+                               
                             </div>
 
 
@@ -162,7 +212,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                         <ol className='list-decimal'>
                             {Object.keys(cart).length != 0 && Object.keys(cart).map((k) => {
                                 return <>
-                                    <div key={k} className="m-6">
+                                    <div key={cart[k].slug} className="m-6">
                                         <div className="flow-root">
                                             <div className="-my-6 divide-y divide-gray-200">
                                                 <div className="flex py-6">
@@ -207,14 +257,14 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                             })}
                         </ol>
                         <div className="py-5 flex items-center justify-center text-lg font-bold text-gray-900">
-                            <button >Subtotal  ₹{subTotal}</button>
+                            <div >Subtotal  ₹{subTotal}</div>
 
                         </div>
 
                     </div>
 
                     <div className="mt-6 p-1 mx-auto ">
-                        <button onClick={initiatePayment} className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-2 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Pay ₹{subTotal}</button>
+                        <button disabled={disabled} onClick={initiatePayment} className="flex items-center justify-center rounded-md border border-transparent bg-black px-6 py-2 text-xl font-medium text-white shadow-sm hover:bg-slate-900 disabled:bg-slate-600">Pay ₹{subTotal}</button>
                     </div>
                 </div>
 

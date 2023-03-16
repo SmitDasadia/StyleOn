@@ -2,12 +2,12 @@
 import Head from "next/head";
 import Benifits from "../components/Benifits";
 import Offers from "../components/offers";
-import BestSeller from "../components/BestSelling";
-import ShopByCategory from "../components/ShopByCategory";
 import styles from "../styles/Home.module.css";
 import Carousel from "../components/Carousel";
+import BestSellingTShirt from "../components/BestSellingTShirt";
 
 export default function Home() {
+  
   return (
     <>
       <div>
@@ -24,14 +24,12 @@ export default function Home() {
 
         {/* trending */}
 
-        <BestSeller />
+        <BestSellingTShirt />
 
        
 
         {/* ShopByCategory */}
         
-
-        <ShopByCategory />
 
 
          {/* offers */}
@@ -48,3 +46,5 @@ export default function Home() {
     </>
   );
 }
+
+

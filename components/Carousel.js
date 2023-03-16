@@ -19,11 +19,11 @@ const Carousel = () => {
         <div
           className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
           <div
-            className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+            className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none min-h-screen"
             data-te-carousel-item
             data-te-carousel-active>
             <img
-              src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
+              src="https://img.freepik.com/premium-vector/informational-flat-banner-summer-sale-lettering_93633-277.jpg?w=900"
               className="block w-full"
               alt="Wild Landscape" />
           </div>

@@ -74,6 +74,9 @@ const Footer = () => {
                 <Link href={'/about'} legacyBehavior>
                   <a className="text-gray-600 hover:text-gray-800"><li>About Us</li></a>
                 </Link>
+                <Link href={'/contact'} legacyBehavior>
+                  <a className="text-gray-600 hover:text-gray-800"><li>Contact Us</li></a>
+                </Link>
               </nav>
             </div>
             

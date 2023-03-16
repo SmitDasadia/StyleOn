@@ -3,9 +3,40 @@ import { resolve } from 'path';
 
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
+import Order from "../../models/Order"
+import connectDb from "../../middleware/mongoose"
 
-export default async function handler(req, res) {
+
+const handler = async (req, res) => {
     if (req.method == 'POST') {
+
+
+
+        // check the cart is temperd or not
+
+
+        // out to cart out of stock
+
+
+        // check details are vaild or not
+
+
+
+
+        // initate order
+
+        let order = new Order({
+            name: req.body.name,
+            email: req.body.email,
+            orderId: req.body.orderId,
+            address: req.body.address,
+            pincode: req.body.pincode,
+            amount: req.body.subTotal,
+            phone: req.body.phone,
+            products: req.body.cart,
+        })
+
+        await order.save();
 
 
 
@@ -33,53 +64,56 @@ export default async function handler(req, res) {
         */
         const checksum = await PaytmChecksum.generateSignature(JSON.stringify(paytmParams.body), process.env.NEXT_PUBLIC_PAYTM_MKEY)
 
-            paytmParams.head = {
-                "signature": checksum
-            };
+        paytmParams.head = {
+            "signature": checksum
+        };
 
-            var post_data = JSON.stringify(paytmParams);
+        var post_data = JSON.stringify(paytmParams);
 
-            const requestAsync = async () => {
-                return new Promise((resolve, reject) => {
-                    var options = {
+        const requestAsync = async () => {
+            return new Promise((resolve, reject) => {
+                var options = {
 
-                        /* for Staging */
-                        hostname: 'securegw-stage.paytm.in',
+                    /* for Staging */
+                    hostname: 'securegw-stage.paytm.in',
 
-                        /* for Production */
-                        // hostname: 'securegw.paytm.in',
+                    /* for Production */
+                    // hostname: 'securegw.paytm.in',
 
-                        port: 443,
-                        path: '/theia/api/v1/initiateTransaction?mid={process.env.NEXT_PUBLIC_PAYTM_MID}&orderId=${req.boay.oid}',
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Content-Length': post_data.length
-                        }
-                    };
+                    port: 443,
+                    path: '/theia/api/v1/initiateTransaction?mid={process.env.NEXT_PUBLIC_PAYTM_MID}&orderId=${req.boay.oid}',
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Content-Length': post_data.length
+                    }
+                };
 
-                    var response = "";
-                    var post_req = https.request(options, function (post_res) {
-                        post_res.on('data', function (chunk) {
-                            response += chunk;
-                        });
-
-                        post_res.on('end', function () {
-                            console.log('Response: ', response);
-                            resolve(response)
-                        });
+                var response = "";
+                var post_req = https.request(options, function (post_res) {
+                    post_res.on('data', function (chunk) {
+                        response += chunk;
                     });
 
-                    post_req.write(post_data);
-                    post_req.end();
-                })
-            }
+                    post_res.on('end', function () {
+                        console.log('Response: ', response);
+                        resolve(response)
+                    });
+                });
 
-            let newRequest = await requestAsync();
-            res.status(200).json(newRequest)
+                post_req.write(post_data);
+                post_req.end();
+            })
+        }
+
+        let newRequest = await requestAsync();
+        res.status(200).json(newRequest)
 
 
-        
+
 
     }
 }
+
+
+export default connectDb(handler)

@@ -1,7 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
+import { useRouter } from 'next/router'
 import React from 'react'
 
-const Order = () => {
+import Order from '../models/Order';
+const mongoose = require('mongoose');
+
+
+const Orders = ({order}) => {
+  console.log(order)
   return (
     <div>
 
@@ -106,4 +112,20 @@ const Order = () => {
   )
 }
 
-export default Order
+export default Orders
+
+
+export async function getServerSideProps(context) {
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      family: 4,
+    })
+  }
+  let order = await Order.findById (context.query.id)
+ 
+  return {
+    props: { order: JSON.parse(JSON.stringify(order))}, // will be passed to the page component as props
+  }
+}

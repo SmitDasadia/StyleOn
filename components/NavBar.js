@@ -99,7 +99,6 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
       ref.current.classList.remove('translate-x-0')
       ref.current.classList.add('translate-x-full')
     }
-    console.log("cart")
     // console.log(userName.value)
   }
 
