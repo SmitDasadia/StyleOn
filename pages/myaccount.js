@@ -125,7 +125,7 @@ const myaccount = () => {
                                 </div>
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='confirmPassword'
-                                        className="block mb-3 text-sm font-semibold ">confirmPassword</label>
+                                        className="block mb-3 text-sm font-semibold ">Confirm Password</label>
                                     <input name="confirmPassword" type="password" placeholder="confirmPassword" id='confirmPassword'
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" autoComplete="off"/>
                                 </div>

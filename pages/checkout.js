@@ -15,6 +15,10 @@ import Head from 'next/head';
 import Script from 'next/script';
 
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 import { FiTrash2, FiMinus, FiPlus } from 'react-icons/Fi';
 
 
@@ -33,7 +37,9 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
     const [disabled, setDisabled] = useState(true)
 
 
-    const handleChange = (e) => {
+    const handleChange = async (e) => {
+
+
         if (e.target.name == 'name') {
             setName(e.target.value)
         }
@@ -46,31 +52,49 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
         else if (e.target.name == 'address') {
             setAdress(e.target.value)
         }
-        else if (e.target.name == 'city') {
-            setCity(e.target.value)
-        }
-        else if (e.target.name == 'state') {
-            setState(e.target.value)
-        }
-        else if (e.target.name == 'country') {
-            setCountry(e.target.value)
-        }
+
         else if (e.target.name == 'pincode') {
             setPincode(e.target.value)
+            if (e.target.value.length == 6) {
+
+                const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
+                let pinJson = await pins.json()
+                if (Object.keys(pinJson).includes(e.target.value)) {
+
+                    setCity(pinJson[e.target.value][0])
+
+                    setState(pinJson[e.target.value][1])
+
+                    setCountry(pinJson[e.target.value][2])
+                } else {
+                    setCity("")
+
+                    setState("")
+
+                    setCountry("")
+                }
+            } else {
+                setCity("")
+
+                setState("")
+
+                setCountry("")
+
+            }
         }
-        if (name && email && phone && address && city && state && country && pincode) {
+        if (name && email && phone && address  && pincode) {
             setDisabled(false)
         }
 
     }
 
 
-   
+
 
     const initiatePayment = async () => {
         let orderId = Math.floor(Math.random() * Date.now())
 
-        const data = { cart, subTotal, orderId, email: email, name , address, pincode, phone };
+        const data = { cart, subTotal, orderId, email: email, name, address, pincode, phone };
 
         let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pretransaction`, {
             method: 'POST', // or 'PUT'
@@ -80,37 +104,56 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
             body: JSON.stringify(data),
         })
 
-        let txnToken = await a.json();
-        console.log(txnToken);
+
+        let txnRes = await a.json();
+        if (txnRes.success) {
+            let txnToken = txnRes.txnToken;
+
+            console.log(txnToken);
 
 
 
 
-        function onScriptLoad() {
-            var config = {
-                "root": "",
-                "flow": "DEFAULT",
-                "data": {
-                    "orderId": orderId, /* update order id */
-                    "token": txnToken, /* update token value */
-                    "tokenType": "TXN_TOKEN",
-                    "amount": subTotal /* update amount */
-                },
-                "handler": {
-                    "notifyMerchant": function (eventName, data) {
-                        console.log("notifyMerchant handler function called");
-                        console.log("eventName => ", eventName);
-                        console.log("data => ", data);
+            function onScriptLoad() {
+                var config = {
+                    "root": "",
+                    "flow": "DEFAULT",
+                    "data": {
+                        "orderId": orderId, /* update order id */
+                        "token": txnToken, /* update token value */
+                        "tokenType": "TXN_TOKEN",
+                        "amount": subTotal /* update amount */
+                    },
+                    "handler": {
+                        "notifyMerchant": function (eventName, data) {
+                            console.log("notifyMerchant handler function called");
+                            console.log("eventName => ", eventName);
+                            console.log("data => ", data);
+                        }
                     }
-                }
-            };
+                };
 
-            window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
-                // after successfully updating configuration, invoke JS Checkout
-                window.Paytm.CheckoutJS.invoke();
-            }).catch(function onError(error) {
-                console.log("error => ", error);
-            });
+
+
+                window.Paytm.CheckoutJS.init(config).then(function onSuccess() {
+                    // after successfully updating configuration, invoke JS Checkout
+                    window.Paytm.CheckoutJS.invoke();
+                }).catch(function onError(error) {
+                    console.log("error => ", error);
+                });
+            } 
+        } else {
+            console.log()
+            toast.error(txnRes.error, {
+                position: "top-left",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
         }
     }
 
@@ -118,6 +161,18 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
     return (
 
         <div className="container p-12 mx-auto ">
+            <ToastContainer
+        position="top-left"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
             <Head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></Head>
             <Script type="application/javascript" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`}  ></Script>
 
@@ -166,12 +221,15 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                 </div>
                             </div>
 
-                           
+
 
                             <div className="space-x-0 lg:flex lg:space-x-4">
-                            <div className="w-full lg:w-1/2 ">
+                                <div className="w-full lg:w-1/2 ">
                                     <label htmlFor='pincode'
-                                        className="block mb-3 text-sm font-semibold ">Pincode</label>
+                                        className="block mb-3 text-sm font-semibold ">Pincodes [  360001,380001,391740,395003,382010]</label>
+
+
+
                                     <input value={pincode} onChange={handleChange} name="pincode" type="text" placeholder="Pincode" id='pincode'
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
@@ -181,11 +239,11 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                     <input value={city} onChange={handleChange} type="text" id='city' name='city' placeholder="City"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
-                                
+
                             </div>
 
                             <div className="space-x-0 lg:flex lg:space-x-4 pt-1">
-                            <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/2">
                                     <label htmlFor='state'
                                         className="block mb-3 text-sm font-semibold ">State</label>
                                     <input value={state} onChange={handleChange} name="state" type="text" id='state' placeholder="State"
@@ -197,7 +255,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                     <input value={country} onChange={handleChange} name="country" type="text" placeholder="Country" id='country'
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
-                               
+
                             </div>
 
 

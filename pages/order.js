@@ -16,13 +16,17 @@ const Orders = ({order}) => {
           <div className="pb-9 mb-7 text-center border-b border-black border-opacity-5">
             <h2 className="text-4xl xl:text-3xl leading-normal font-heading font-medium text-center text-green-500">Your order has been successfully placed!</h2>
           </div>
-          <h1 className="text-3xl lg:text-2xl font-semibold leading-7 lg:leading-9  text-gray-800">Order ID : 13432</h1>
+          <h1 className="text-3xl lg:text-2xl font-semibold leading-7 lg:leading-9  text-gray-800">Order ID : </h1>
           <p className="text-base font-medium leading-6 text-gray-600">Order Placed: 00/00/00 00:00</p>
         </div>
         <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
           <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
             <div className="flex flex-col justify-start items-start bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
               <p className="text-lg md:text-xl font-semibold leading-6 xl:leading-5 text-gray-800">Total Items</p>
+              
+              
+              
+              
               <div className="mt-4 md:mt-6 flex  flex-col md:flex-row justify-start items-start md:items-center md:space-x-6 xl:space-x-8 w-full ">
                 <div className="pb-4 md:pb-8 w-full md:w-40">
                   <img className="w-full hidden md:block" src="https://m.media-amazon.com/images/I/512JaQMamfL._AC_AA152_.jpg" alt="dress" />
@@ -53,6 +57,10 @@ const Orders = ({order}) => {
                   </div>
                 </div>
               </div>
+
+
+
+                
 
             </div>
             <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 md:space-x-6 xl:space-x-8">

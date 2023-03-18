@@ -31,7 +31,7 @@ const BestSellingTshirt = () => {
             title: 'Java Script Developer',
             imageSrc: 'https://m.media-amazon.com/images/I/51hEsTvylGL._UX679_.jpg',
             imageAlt: 'Java Script Developer',
-            href: '/product/Java%20Script%20Developer%20(S,Blue)',
+            href: '/product/JavaScript-Developer(S,Blue)',
            
             price: "499"
         },
@@ -55,7 +55,7 @@ const BestSellingTshirt = () => {
             title: 'Give Me <br/> ',
             imageSrc: 'https://m.media-amazon.com/images/I/61-lXIEMabL._UX679_.jpg',
             imageAlt: 'Give Me <br/> ',
-            href: '/product/Give-Me-Br(S,Black)',
+            href: "/product/Give-Me-br(S,Black)",
            
             price: "499"
         },
@@ -124,7 +124,7 @@ const BestSellingTshirt = () => {
             </section> */}
             <div className="bg-white min-h-screen">
                 <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-                    <div className="lg:text-4xl  text-gray-800 flex mx-auto justify-center text-center mb-10 font-heading text-4xl font-bold">
+                    <div className="lg:text-4xl  text-gray-800 flex mx-auto justify-center text-center mt-10 mb-10 font-heading text-4xl font-bold">
                         Top Selling T-Shirts
                     </div>
 

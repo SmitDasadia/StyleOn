@@ -4,6 +4,7 @@ import { resolve } from 'path';
 const https = require('https');
 const PaytmChecksum = require('paytmchecksum');
 import Order from "../../models/Order"
+import Product from "../../models/Product"
 import connectDb from "../../middleware/mongoose"
 
 
@@ -13,6 +14,22 @@ const handler = async (req, res) => {
 
 
         // check the cart is temperd or not
+        let product, sumTotal = 0;
+        let cart = req.body.cart;
+
+        for (let item in cart) {
+            product = await Product.findOne({ slug: item });
+            sumTotal = cart[item.price] * cart[item].qty;
+            if (product.price != cart[item].price) {
+                res.status(400).json({ success: false, "error": "The price of some item in your cart hav been changed. Plese try again!" })
+                return
+            }
+        }
+
+        if (sumTotal != req.body.subTotal) {
+            res.status(400).json({ success: false, "error": "The price of some item in your cart hav been changed. Plese try again!" })
+            return
+        }
 
 
         // out to cart out of stock
@@ -81,7 +98,7 @@ const handler = async (req, res) => {
                     // hostname: 'securegw.paytm.in',
 
                     port: 443,
-                    path: '/theia/api/v1/initiateTransaction?mid={process.env.NEXT_PUBLIC_PAYTM_MID}&orderId=${req.boay.oid}',
+                    path: '/theia/api/v1/initiateTransaction?mid={process.env.NEXT_PUBLIC_PAYTM_MID}&orderId=${req.body.oid}',
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -96,8 +113,10 @@ const handler = async (req, res) => {
                     });
 
                     post_res.on('end', function () {
-                        console.log('Response: ', response);
-                        resolve(response)
+                        let ress = JSON.parse(response).body;
+                        ress.success = true;
+
+                        resolve(ress)
                     });
                 });
 
