@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import Product from '../../models/Product'
@@ -19,6 +20,11 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
   const [service, setService] = useState()
   const [color, setColor] = useState(product.color)
   const [size, setSize] = useState(product.size)
+  useEffect(() => {
+    setColor(product.color);
+    setSize(product.size)
+  }, [router.query])
+
 
   const checkPincode = async () => {
     const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
@@ -58,7 +64,7 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
 
   const refershVarint = (newsize, newcolor) => {
     let url = `${process.env.NEXT_PUBLIC_HOST}/product/${variants[newcolor][newsize]['slug']}`;
-    window.location = url;
+    router.push(url)
   }
 
 
@@ -138,7 +144,8 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                 <h2 className="mt-6 mb-4 text-xl md:text-xl lg:text-xl font-heading font-medium">{product.title} ({product.color}/{product.size})</h2>
                 {/* <h3 className="mt-6 mb-4 text-xl md:text-sm lg:text-xl font-heading font-medium"></h3> */}
                 <p className="flex items-center mb-6">
-                  <span className="text-3xl text-blue-500 font-medium">₹{product.price}</span>
+                  {product.avialableQty > 0 && <span className="text-3xl text-blue-500 font-medium">₹{product.price}</span>}
+                  {product.avialableQty == 0 && <span className="text-3xl text-blue-500 font-medium">Out Of Stock!</span>}
                 </p>
                 {/* <p className="text-sm  text-gray-400"></p> */}
               </div>
@@ -249,16 +256,19 @@ const Slug = ({ addToCart, product, variants, buyNow }) => {
                 {!service && service != null && <div className="text-red-800">Sorry! This Pincode is not Servivceable!</div>} */}
               </div>
               <div className="flex flex-wrap -mx-2 mb-12">
-                <button onClick={() => { buyNow(slug, 1, product.price, product.title, size, color, product.img) }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
+                <button disabled={product.avialableQty == 0} onClick={() => { buyNow(slug, 1, product.price, product.title, size, color, product.img) }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0 disabled:bg-slate-800 bg-[#111] hover:bg-gray-600 rounded-md  cursor-pointer  leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
 
-                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-[#111] focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-gray-600 rounded-md  cursor-pointer">BuyNow</a>
+                  <a className="block  ">Buy Now</a>
 
                 </button>
 
-                <button className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0">
-                  <a className="block py-4 px-2 leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center bg-[#111] focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 hover:bg-gray-600 rounded-md cursor-pointer"
-                    onClick={() => { addToCart(slug, 1, product.price, product.title, size, color, product.img) }}>Add to Bag</a>
+
+                <button disabled={product.avialableQty == 0} onClick={() => { addToCart(slug, 1, product.price, product.title, size, color, product.img) }} className="w-full md:w-2/3 py-3 px-2 mt-5 mb-2 md:mb-0 disabled:bg-slate-800 bg-[#111] hover:bg-gray-600 rounded-md  cursor-pointer  leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+
+                  <a className="block  ">Add to Bag</a>
+
                 </button>
+
                 {/* <div className="w-full md:w-1/3 px-2">
                   <a className="flex w-full py-4 px-2 items-center justify-center leading-8 font-heading font-medium tracking-tighter text-xl text-center bg-white focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50 hover:bg-opacity-60 rounded-md" href="#">
                     <span className="mr-2">Wishlist</span>
@@ -350,7 +360,9 @@ export async function getServerSideProps(context) {
       family: 4,
     })
   }
+  let error;
   let product = await Product.findOne({ slug: context.query.slug })
+  
   let variants = await Product.find({ title: product.title, category: product.category })
   let colorSizeSlug = {}// {red:{xl:{slug:'hacker-Tshirt(S,Red)'}}}
   for (let item of variants) {
@@ -361,6 +373,7 @@ export async function getServerSideProps(context) {
       colorSizeSlug[item.color][item.size] = { slug: item.slug }
     }
   }
+  
 
   return {
     props: { product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSizeSlug)) }, // will be passed to the page component as props

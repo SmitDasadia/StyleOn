@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useEffect } from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 // import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import React from 'react'
@@ -11,6 +12,7 @@ import { BsTruck } from 'react-icons/Bs';
 import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2,FiX, FiMinus,FiPlus } from 'react-icons/Fi';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/router'
 
 const navigation = {
   categories: [
@@ -90,22 +92,41 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
   const [open, setOpen] = useState(false)
   const ref = useRef()
   const [dropdown, setDropDown] = useState(false)
+  const [sidebar, setsidebar] = useState(false)
+  const router = useRouter();
+
+  useEffect(() => {
+    Object.keys(cart).length !== 0 && setsidebar(true)
+    if(router.pathname == "/checkout"){
+      setsidebar(false)
+    }
+
+    if(router.pathname == "/myOrders"){
+      setsidebar(false)
+    }
+
+
+    if(router.pathname == "/order"){
+      setsidebar(false)
+    }
+
+    if(router.pathname == "/myaccount"){
+      setsidebar(false)
+    }
+   
+  
+  }, [])
+  
   const toogleCart = () => {
-    if (ref.current.classList.contains('translate-x-full')) {
-      ref.current.classList.remove('translate-x-full')
-      ref.current.classList.add('translate-x-0')
-    }
-    else if (!ref.current.classList.contains('translate-x-full')) {
-      ref.current.classList.remove('translate-x-0')
-      ref.current.classList.add('translate-x-full')
-    }
+    setsidebar(!sidebar)
+    
     // console.log(userName.value)
   }
 
 
 
   return (
-    <div className="bg-white top-0 z-10 shadow-md">
+    <div className={`bg-white top-0 z-10 shadow-md `}>
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-50 lg:hidden" onClose={setOpen}>
@@ -271,7 +292,7 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
                   <a>
                     <img
                       className="h-6 w-auto"
-                      src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351"
+                      src="https://raw.githubusercontent.com/SmitDasadia/Img/main/Artboard%201.png"
                       alt="Style.com"
                     />
                   </a>
@@ -489,7 +510,7 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
 
         </nav>
 
-        <div ref={ref} className={`h-screen overflow-y-scroll sidebar absolute top-0 right-0 bg-slate-100 p-10 transform transition-transform z-50 ${Object.keys(cart).length !== 0 ? 'translate-x-0' : 'translate-x-full'}`}>
+        <div ref={ref} className={`h-screen overflow-y-scroll sidebar absolute top-0 right-0 bg-slate-100 p-10 transform-all z-50 ${sidebar ? 'right-0' : 'hidden'}`}>
           <h1 className='font-bold text-3xl text-center'>Your Bag</h1>
           {/* <span className='text-xl md:text-2xl items-center'><CiDeliveryTruck /></span> */}
           <h2 className='flex flex-1 items-center justify-center text-sm py-4'><BsTruck className='text-lg md:text-2xl mx-3' />Free Shipping & Free Returns!</h2>

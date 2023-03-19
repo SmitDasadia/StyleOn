@@ -9,7 +9,7 @@ const mongoose = require('mongoose');
 
 
 const Orders = ({order, clearCart}) => {
-  const products = order.products;
+  // const products = order.products;
  const router = useRouter();
  useEffect(() => {
   
