@@ -9,10 +9,10 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadingBar from 'react-top-loading-bar'
 
 function MyApp({ Component, pageProps }) {
-  
+
   const [cart, setCart] = useState({})
   const [subTotal, setSubTotal] = useState(0)
-  const [user, setUser] = useState({ value: null })
+  const [myuser, setmyuser] = useState({ value: null })
   const [key, setKey] = useState()
   const [progress, setProgress] = useState(0)
   // const [userName, setuserName] = useState({value: null})
@@ -20,10 +20,10 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     console.log("I am for useEffect form _app.js.")
-    router.events.on('routeChangeStart',()=>{
+    router.events.on('routeChangeStart', () => {
       setProgress(40)
     })
-    router.events.on('routeChangeComplete',()=>{
+    router.events.on('routeChangeComplete', () => {
       setProgress(100)
     })
     try {
@@ -36,10 +36,10 @@ function MyApp({ Component, pageProps }) {
       console.error(error)
       localStorage.clear()
     }
-    const token = localStorage.getItem('token')
-    if (token) {
-      setUser({ value: token })
-      // setuserName({value: token.name})
+    const myuser = JSON.parse(localStorage.getItem('myuser'))
+    if (myuser) {
+      setmyuser({ value: myuser.token, email: myuser.email })
+      // setuserName({value: myuser.name})
     }
     setKey(Math.random())
   }, [router.query])
@@ -103,8 +103,8 @@ function MyApp({ Component, pageProps }) {
   }
 
   const logout = () => {
-    localStorage.removeItem('token')
-    setUser({ value: null })
+    localStorage.removeItem('myuser')
+    setmyuser({ value: null })
     setKey(Math.random())
     router.push('/')
     toast.success('You are successfully logged out.', {
@@ -120,15 +120,15 @@ function MyApp({ Component, pageProps }) {
   }
 
   return <>
-  <LoadingBar
+    <LoadingBar
       color='white'
       progress={progress}
       waitingTime={400}
       onLoaderFinished={() => setProgress(0)}
     />
-   
-     {key && <NavBar logout={logout} user={user} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} removeItemFromCart={removeItemFromCart} buyNow={buyNow} />}
-      
+
+    {key && <NavBar logout={logout} myuser={myuser} key={key} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} removeItemFromCart={removeItemFromCart} buyNow={buyNow} />}
+
     <ToastContainer
       position="top-left"
       autoClose={3000}
@@ -141,8 +141,8 @@ function MyApp({ Component, pageProps }) {
       pauseOnHover
       theme="light"
     />
-     
-    <Component cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart}
+
+    <Component  cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart}
       subTotal={subTotal} removeItemFromCart={removeItemFromCart} buyNow={buyNow}{...pageProps} />
     <Footer />
   </>

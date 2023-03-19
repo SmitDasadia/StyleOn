@@ -15,11 +15,11 @@ const Login = () => {
   const router = useRouter()
 
   useEffect(() => {
-    if(localStorage.getItem('token')){
+    if (localStorage.getItem('myuser')) {
       router.push('/')
     }
   })
-  
+
 
   const handleChange = (e) => {
     if (e.target.name == 'email') {
@@ -45,7 +45,7 @@ const Login = () => {
     setEmail('')
     setPassword('')
     if (respose.success) {
-      localStorage.setItem('token', respose.token)
+      localStorage.setItem('myuser', JSON.stringify({ token: respose.token, email: respose.email }))
       toast.success('You are successfully logged in.', {
         position: "top-left",
         autoClose: 3000,
@@ -106,12 +106,12 @@ const Login = () => {
               <div>
                 <label className="block mb-4">
                   <label htmlFor='email' className="mb-5 text-gray-900 font-semibold leading-normal">Email Address </label>
-                  
+
                   <input value={email} onChange={handleChange} className=" w-full   bg-white rounded border border-gray-300 focus:border-[#111] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="email" type="email" placeholder="Enter email address" name='email' />
                 </label>
                 <label className="block mb-5">
-                <label htmlFor='password' className="mb-5 text-gray-900 font-semibold leading-normal">Password</label>
-                  
+                  <label htmlFor='password' className="mb-5 text-gray-900 font-semibold leading-normal">Password</label>
+
                   <input value={password} onChange={handleChange} className="w-full   bg-white rounded border border-gray-300 focus:border-[#111] focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" id="password" type="password" placeholder="Enter Password" name='password' />
                 </label>
 
@@ -135,7 +135,7 @@ const Login = () => {
               </div> */}
             </div>
 
-            
+
 
             <div>
               <button type="submit" className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#111] py-2 px-4 text-sm font-medium text-white hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -149,9 +149,9 @@ const Login = () => {
         </div>
       </div>
 
-     
 
-      
+
+
     </div>
   )
 }

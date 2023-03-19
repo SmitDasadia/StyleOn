@@ -102,6 +102,9 @@ export async function getServerSideProps(context) {
       if (item.avialableQty > 0) {
         bundi[item.title].color = [item.color]
         bundi[item.title].size = [item.size]
+      } else {
+        bundi[item.title].color = []
+        bundi[item.title].size = []
       }
     }
   }

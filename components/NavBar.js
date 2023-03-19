@@ -86,7 +86,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function NavBar1({ logout, user, cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) {
+export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) {
   const [open, setOpen] = useState(false)
   const ref = useRef()
   const [dropdown, setDropDown] = useState(false)
@@ -417,7 +417,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                     </ul>
                   </div>}
 
-                  {user.value &&
+                  {myuser.value &&
                     <>
                       <FiUserCheck className='text-2xl md:text-2xl mx-7 my-5 cursor-pointer' />
 
@@ -456,7 +456,7 @@ export default function NavBar1({ logout, user, cart, addToCart, removeFromCart,
                 </div> */}
 
                 {/* Cart */}
-                {!user.value && <Link href={'/login'} legacyBehavior>
+                {!myuser.value && <Link href={'/login'} legacyBehavior>
                   <a><FiUser className='text-2xl md:text-2xl mx-5 my-5 cursor-pointer' /></a>
                 </Link>}
                 <button onClick={toogleCart}>

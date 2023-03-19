@@ -11,31 +11,57 @@ import connectDb from "../../middleware/mongoose"
 const handler = async (req, res) => {
     if (req.method == 'POST') {
 
+        // check details are vaild or not
+        if(req.body.phone.length != 10 || !Number.isInteger(req.body.phone)){
+            res.status(400).json({ success: false, "error": "Invalid Phone Number" })
+            return
+        }
+
+        if(req.body.pincode.length != 6 || !Number.isInteger(req.body.pincode)){
+            res.status(400).json({ success: false, "error": "Invalid pincode" })
+            return
+        }
+
 
 
         // check the cart is temperd or not
         let product, sumTotal = 0;
         let cart = req.body.cart;
 
+        if (req.body.subTotal <= 0) {
+            res.status(400).json({ success: false, "error": "Cart is empty. Please your build cart and try again" })
+            return
+        }
+
         for (let item in cart) {
             product = await Product.findOne({ slug: item });
-            sumTotal = cart[item.price] * cart[item].qty;
+            sumTotal += cart[item.price] * cart[item].qty;
+
+
+
+            // out to cart out of stock
+
+            if (product.avialableQty < cart[item].qty) {
+                res.status(400).json({ success: false, "error": "Some1 item in your cart is out of stock.Please try again!" })
+                return
+            }
+
             if (product.price != cart[item].price) {
-                res.status(400).json({ success: false, "error": "The price of some item in your cart hav been changed. Plese try again!" })
+                res.status(400).json({ success: false, "error": "The1 price of some item in your cart hav been changed. Please try again!" })
                 return
             }
         }
 
-        if (sumTotal != req.body.subTotal) {
-            res.status(400).json({ success: false, "error": "The price of some item in your cart hav been changed. Plese try again!" })
+        if (sumTotal !== req.body.subTotal) {
+            res.status(400).json({ success: false, "error": "The price1 of some item in your cart hav been changed. Please try again!" })
             return
         }
+        
 
 
-        // out to cart out of stock
 
 
-        // check details are vaild or not
+        
 
 
 

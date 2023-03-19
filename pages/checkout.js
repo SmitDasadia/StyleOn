@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 /* eslint-disable @next/next/no-css-tags */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react';
@@ -24,7 +24,7 @@ import { FiTrash2, FiMinus, FiPlus } from 'react-icons/Fi';
 
 
 
-const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
+const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart}) => {
 
     const [name, setName] = useState(null)
     const [email, setEmail] = useState(null)
@@ -35,6 +35,20 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
     const [country, setCountry] = useState(null)
     const [pincode, setPincode] = useState(null)
     const [disabled, setDisabled] = useState(true)
+
+
+    const [myuser, setmyuser] = useState({ value: null })
+
+    useEffect(() => {
+        const myuser = JSON.parse(localStorage.getItem('myuser'))
+        if (myuser.token) {
+            setmyuser(myuser)
+            setEmail(myuser.email)
+           
+        }
+
+    }, [])
+
 
 
     const handleChange = async (e) => {
@@ -82,7 +96,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
             }
         }
-        if (name && email && phone && address  && pincode) {
+        if (name && email && phone && address && pincode) {
             setDisabled(false)
         }
 
@@ -141,9 +155,10 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                 }).catch(function onError(error) {
                     console.log("error => ", error);
                 });
-            } 
+            }
         } else {
-            console.log()
+            console.log('not vaild mkey')
+            clearCart()
             toast.error(txnRes.error, {
                 position: "top-left",
                 autoClose: 3000,
@@ -153,7 +168,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-              });
+            });
         }
     }
 
@@ -162,17 +177,17 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
         <div className="container p-12 mx-auto ">
             <ToastContainer
-        position="top-left"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
+                position="top-left"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="light"
+            />
             <Head><meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" /></Head>
             <Script type="application/javascript" src={`${process.env.NEXT_PUBLIC_PAYTM_HOST}/merchantpgpui/checkoutjs/merchants/${process.env.NEXT_PUBLIC_PAYTM_MID}.js`}  ></Script>
 
@@ -198,16 +213,21 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
                                 <div className="w-full lg:w-1/2 ">
                                     <label htmlFor='phonenumber' className="block mb-3 text-sm font-semibold ">Phone Number</label>
-                                    <input value={phone} onChange={handleChange} type="text" id='phonenumber' name='phone' placeholder="Phone Number"
+                                    <input value={phone} onChange={handleChange} type="text" id='phonenumber' name='phone' placeholder="Your 10 Digit Phone Number"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                 </div>
                             </div>
                             <div className="mt-4">
                                 <div className="w-full">
                                     <label htmlFor='email'
-                                        className="block mb-3 text-sm font-semibold ">Email</label>
-                                    <input value={email} onChange={handleChange} type="text" id='email' name='email' placeholder="Email"
-                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
+                                        className="block mb-3 text-sm font-semibold ">Email </label>
+
+                                    {myuser && myuser.value ? <input value={myuser.email} type="text" id='email' name='email' placeholder="Email"
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" readOnly />
+                                        :
+                                        <input value={email} onChange={handleChange} type="text" id='email' name='email' placeholder="Email"
+                                            className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />}
+
                                 </div>
                             </div>
                             <div className="mt-4">

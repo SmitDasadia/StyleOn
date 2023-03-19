@@ -102,6 +102,9 @@ export async function getServerSideProps(context) {
       if (item.avialableQty > 0) {
         shorts[item.title].color = [item.color]
         shorts[item.title].size = [item.size]
+      } else{
+        shorts[item.title].color = []
+        shorts[item.title].size = []
       }
     }
   }

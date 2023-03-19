@@ -105,6 +105,10 @@ export async function getServerSideProps(context) {
       if (item.avialableQty > 0) {
         sportswear[item.title].color = [item.color]
         sportswear[item.title].size = [item.size]
+      } else {
+        sportswear[item.title].color = []
+        sportswear[item.title].size = []
+
       }
     }
   }

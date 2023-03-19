@@ -31,14 +31,14 @@ const orders = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token: localStorage.getItem('token') }),
+        body: JSON.stringify({ token: JSON.parse(localStorage.getItem('myuser')).token }),
       })
 
       let res = await a.json();
       setOrders(res.orders)
     }
 
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem('myuser')) {
       router.push('/')
 
     } else {
@@ -53,7 +53,7 @@ const orders = () => {
         <h2 className="mx-auto text-center text-4xl font-bold tracking-tight text-gray-900">Order History</h2>
 
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {/* {Orders.map((item) => (
+          {/* {order.map((item) => (
             <div key={item._id} className="group relative">
               <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                 <img
