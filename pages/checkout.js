@@ -2,19 +2,12 @@
 /* eslint-disable @next/next/no-img-element */
 
 /* eslint-disable @next/next/no-css-tags */
-import React, { useState, useEffect } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRef } from 'react';
-// import { BsHandbag, BsTruck } from 'react-icons/Bs';
-// import { MdDeleteOutline } from 'react-icons/Md';
+import React, { useState, useEffect } from 'react';
+import Router, { useRouter } from 'next/router';
 import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
-// import { RiSecurePaymentLine } from 'react-icons/Ri';
 import { MdDeleteOutline } from 'react-icons/Md';
 import Head from 'next/head';
 import Script from 'next/script';
-
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -24,7 +17,7 @@ import { FiTrash2, FiMinus, FiPlus } from 'react-icons/Fi';
 
 
 
-const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart}) => {
+const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
 
     const [name, setName] = useState(null)
     const [email, setEmail] = useState(null)
@@ -41,11 +34,14 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
     useEffect(() => {
         const myuser = JSON.parse(localStorage.getItem('myuser'))
-        if (myuser.token) {
+        
+        if (!myuser.token) {
+            Router.push('/login')
+        } else {
             setmyuser(myuser)
             setEmail(myuser.email)
-           
         }
+
 
     }, [])
 
@@ -158,7 +154,9 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
             }
         } else {
             console.log('not vaild mkey')
-            clearCart()
+            if(txnRes.cartClear){
+                clearCart()
+            }
             toast.error(txnRes.error, {
                 position: "top-left",
                 autoClose: 3000,
@@ -222,7 +220,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                     <label htmlFor='email'
                                         className="block mb-3 text-sm font-semibold ">Email </label>
 
-                                    {myuser && myuser.value ? <input value={myuser.email} type="text" id='email' name='email' placeholder="Email"
+                                    {myuser && myuser.token ? <input value={myuser.email} type="text" id='email' name='email' placeholder="Email"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" readOnly />
                                         :
                                         <input value={email} onChange={handleChange} type="text" id='email' name='email' placeholder="Email"

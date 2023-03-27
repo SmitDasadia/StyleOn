@@ -13,7 +13,7 @@ const Footer = () => {
         <div className="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
           <div className="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left">
             <a className="flex title-font  items-center md:justify-start justify-center text-white">
-              <img src="https://cdn.shopify.com/s/files/1/0549/4895/4134/t/82/assets/logo-black.svg?v=140515931841125915371649784351" alt="logo" />
+            <h2  className="h-8 text-4xl w-auto">StyleOn</h2>
             </a>
             <p className="mt-2 text-sm text-white">Wear High Quality Cloths!</p>
           </div>

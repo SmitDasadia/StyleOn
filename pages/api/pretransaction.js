@@ -6,19 +6,27 @@ const PaytmChecksum = require('paytmchecksum');
 import Order from "../../models/Order"
 import Product from "../../models/Product"
 import connectDb from "../../middleware/mongoose"
+import pincode from "../../data/pincode.json";
 
 
 const handler = async (req, res) => {
     if (req.method == 'POST') {
 
         // check details are vaild or not
-        if(req.body.phone.length != 10 || !Number.isInteger(req.body.phone)){
-            res.status(400).json({ success: false, "error": "Invalid Phone Number" })
+        if(req.body.phone.length != 10 && !Number.isInteger(req.body.phone)){
+            res.status(400).json({ success: false, "error": "Invalid Phone Number", cartClear: false })
             return
         }
 
-        if(req.body.pincode.length != 6 || !Number.isInteger(req.body.pincode)){
-            res.status(400).json({ success: false, "error": "Invalid pincode" })
+        if(req.body.pincode.length != 6 && !Number.isInteger(req.body.pincode)){
+            res.status(400).json({ success: false, "error": "Invalid pincode", cartClear : false })
+            return
+        }
+
+        // check the pincode is servicable or not
+
+        if(!Object.keys(pincode).includes(req.body.pincode)){
+            res.status(400).json({ success: false, "error": "Your pincode is not serviceable!", cartClear : false })
             return
         }
 
@@ -29,7 +37,7 @@ const handler = async (req, res) => {
         let cart = req.body.cart;
 
         if (req.body.subTotal <= 0) {
-            res.status(400).json({ success: false, "error": "Cart is empty. Please your build cart and try again" })
+            res.status(400).json({ success: false, "error": "Cart is empty. Please your build cart and try again",cartClear : false })
             return
         }
 
@@ -42,18 +50,18 @@ const handler = async (req, res) => {
             // out to cart out of stock
 
             if (product.avialableQty < cart[item].qty) {
-                res.status(400).json({ success: false, "error": "Some1 item in your cart is out of stock.Please try again!" })
+                res.status(400).json({ success: false, "error": "Some item in your cart is out of stock.Please try again!", cartClear : true })
                 return
             }
 
             if (product.price != cart[item].price) {
-                res.status(400).json({ success: false, "error": "The1 price of some item in your cart hav been changed. Please try again!" })
+                res.status(400).json({ success: false, "error": "The price of some item in your cart hav been changed. Please try again!",cartClear : true })
                 return
             }
         }
 
         if (sumTotal !== req.body.subTotal) {
-            res.status(400).json({ success: false, "error": "The price1 of some item in your cart hav been changed. Please try again!" })
+            res.status(400).json({ success: false, "error": "The price of some item in your cart hav been changed. Please try again!", cartClear : true })
             return
         }
         
@@ -141,6 +149,7 @@ const handler = async (req, res) => {
                     post_res.on('end', function () {
                         let ress = JSON.parse(response).body;
                         ress.success = true;
+                        ress.cartClear = false;
 
                         resolve(ress)
                     });

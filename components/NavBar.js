@@ -126,7 +126,7 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
 
 
   return (
-    <div className={`bg-white top-0 z-10 shadow-md `}>
+    <div className={`bg-white top-0 z-10 shadow-md sticky `}>
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-50 lg:hidden" onClose={setOpen}>
@@ -290,11 +290,7 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
               <Link href='/' legacyBehavior>
                 <div className="ml-2 flex mx-auto justify-center items-center cursor-pointer">
                   <a>
-                    <img
-                      className="h-6 w-auto"
-                      src="https://raw.githubusercontent.com/SmitDasadia/Img/main/Artboard%201.png"
-                      alt="Style.com"
-                    />
+                  <h2  className="h-8 text-4xl w-auto">StyleOn</h2>
                   </a>
                 </div>
 
@@ -597,9 +593,13 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
                 <div className="mt-6">
                   <div className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</div>
                 </div>
-                <div className="mt-6">
+                {myuser.value && <div className="mt-6">
                   <Link href="/checkout" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>
-                </div>
+                </div>}
+
+                {!myuser.value && <div className="mt-6">
+                  <Link href="/login" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>
+                </div>}
               </div>
 
 
