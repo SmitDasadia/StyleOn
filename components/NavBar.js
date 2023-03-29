@@ -311,7 +311,7 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
 
               {/* Flyout menus */}
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="flex h-full space-x-8">
+                <div className="flex h-full space-x-8 ">
                   {navigation.categories.map((category) => (
                     <Popover key={category.name} className="flex">
                       {({ open }) => (
@@ -401,7 +401,7 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
                     <Link
                       key={page.name}
                       href={page.href}
-                      className="flex items-center mx-auto justify-center text-center text-sm font-bold text-gray-700 hover:text-gray-800 md:items-center"
+                      className="flex items-center mx-auto justify-center text-center text-sm font-bold text-gray-700 hover:text-gray-800 md:items-center border-[#111] hover:border-b-2"
                     >
                       {page.name}
                     </Link>
@@ -591,14 +591,14 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
                 <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
 
                 <div className="mt-6">
-                  <div className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900" onClick={clearCart}>Clear Bag</div>
+                  <div className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900 cursor-pointer" onClick={clearCart}>Clear Bag</div>
                 </div>
                 {myuser.value && <div className="mt-6">
-                  <Link href="/checkout" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>
+                  <Link href="/checkout" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900 cursor-pointer">Checkout</a></Link>
                 </div>}
 
                 {!myuser.value && <div className="mt-6">
-                  <Link href="/login" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900">Checkout</a></Link>
+                  <Link href="/login" legacyBehavior><a className="flex items-center justify-center rounded-md border border-transparent bg-[#111] px-6 py-3 text-xl font-medium text-white shadow-sm hover:bg-slate-900 cursor-pointer">Checkout</a></Link>
                 </div>}
               </div>
 

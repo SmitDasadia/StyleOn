@@ -1,52 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from "react";
+// /* eslint-disable @next/next/no-img-element */
+import { FiChevronRight,FiChevronLeft } from 'react-icons/Fi';
 
-const Carousel = () => {
+
+import React, { useState, useEffect } from 'react';
+
+const Carousel = ({ images }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   useEffect(() => {
-    const use = async () => {
-      await import('tw-elements').default;
-    };
-    use();
-  }, []);
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex(
+        (currentImageIndex + 1) % images.length
+      );
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [currentImageIndex, images.length]);
 
   return (
-    <>
-      <div
-        id="carouselExampleSlidesOnly"
-        className="relative"
-        data-te-carousel-init
-        data-te-carousel-slide>
-        <div
-          className="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
-          <div
-            className="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none min-h-screen"
-            data-te-carousel-item
-            data-te-carousel-active>
-            <img
-              src="https://img.freepik.com/premium-vector/informational-flat-banner-summer-sale-lettering_93633-277.jpg?w=900"
-              className="block w-full"
-              alt="Wild Landscape" />
-          </div>
-          <div
-            className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-            data-te-carousel-item>
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/slides/042.webp"
-              className="block w-full"
-              alt="Camera" />
-          </div>
-          <div
-            className="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
-            data-te-carousel-item>
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/slides/043.webp"
-              className="block w-full"
-              alt="Exotic Fruits" />
-          </div>
-        </div>
+    <div className="relative">
+      <div className="carousel">
+        
+        <img
+          className="mmx-auto h-full w-full object-contain"
+          src={images[currentImageIndex]}
+          alt="carousel-image"
+        />
+       
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default Carousel
+export default Carousel;

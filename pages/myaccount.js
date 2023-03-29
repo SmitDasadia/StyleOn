@@ -65,33 +65,35 @@ const myaccount = () => {
                             </div>
 
                             <div className="space-x-0 lg:flex lg:space-x-4">
+                            <div className="w-full lg:w-1/2 ">
+                                    <label htmlFor='pincode'
+                                        className="block mb-3 text-sm font-semibold ">Pincode</label>
+                                    <input name="pincode" type="text" placeholder="Pincode" id='pincode'
+                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
+                                </div>
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='city'
                                         className="block mb-3 text-sm font-semibold ">City</label>
                                     <input type="text" id='city' name='city' placeholder="City"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
                                 </div>
-                                <div className="w-full lg:w-1/2">
+                                
+                            </div>
+
+                            <div className="space-x-0 lg:flex lg:space-x-4 pt-1">
+                            <div className="w-full lg:w-1/2">
                                     <label htmlFor='state'
                                         className="block mb-3 text-sm font-semibold ">State</label>
                                     <input name="state" type="text" id='state' placeholder="State"
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
                                 </div>
-                            </div>
-
-                            <div className="space-x-0 lg:flex lg:space-x-4 pt-1">
                                 <div className="w-full lg:w-1/2">
                                     <label htmlFor='country'
                                         className="block mb-3 text-sm font-semibold ">Country</label>
                                     <input name="country" type="text" placeholder="Country" id='country'
                                         className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
                                 </div>
-                                <div className="w-full lg:w-1/2 ">
-                                    <label htmlFor='pincode'
-                                        className="block mb-3 text-sm font-semibold ">Pincode</label>
-                                    <input name="pincode" type="text" placeholder="Pincode" id='pincode'
-                                        className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-[#111] focus:ring-opacity-50 rounded-md" />
-                                </div>
+                               
                             </div>
 
 
