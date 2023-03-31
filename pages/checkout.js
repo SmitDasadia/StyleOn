@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 
@@ -19,14 +20,14 @@ import { FiTrash2, FiMinus, FiPlus } from 'react-icons/Fi';
 
 const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, removeItemFromCart }) => {
 
-    const [name, setName] = useState(null)
-    const [email, setEmail] = useState(null)
-    const [phone, setPhone] = useState(null)
-    const [address, setAdress] = useState(null)
-    const [city, setCity] = useState(null)
-    const [state, setState] = useState(null)
-    const [country, setCountry] = useState(null)
-    const [pincode, setPincode] = useState(null)
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [address, setAdress] = useState("")
+    const [city, setCity] = useState("")
+    const [state, setState] = useState("")
+    const [country, setCountry] = useState("")
+    const [pincode, setPincode] = useState("")
     const [disabled, setDisabled] = useState(true)
 
 
@@ -34,18 +35,76 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
     useEffect(() => {
         const myuser = JSON.parse(localStorage.getItem('myuser'))
-        
-        if (!myuser.token) {
-            Router.push('/login')
-        } else {
-            setmyuser(myuser)
-            setEmail(myuser.email)
+
+        if (!myuser) {
+            Router.push('/')
         }
+        if (myuser && myuser.token) {
+
+            setmyuser(myuser);
+            setEmail(myuser.email);
+        }
+        fetchData(myuser.token);
 
 
     }, [])
 
+    useEffect(() => {
+        if (phone.length> 3 && address.length> 3 && pincode.length> 3) {
+            setDisabled(false);
+        } else {
+            setDisabled(true);
+        }
 
+    }, [phone, address, pincode])
+
+
+
+
+
+    const getPinCode = async (pin) => {
+        let pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
+        let pinJson = await pins.json()
+        if (Object.keys(pinJson).includes(pin)) {
+
+            setCity(pinJson[pin][0])
+
+            setState(pinJson[pin][1])
+
+            setCountry(pinJson[pin][2])
+        } else {
+            setCity("")
+
+            setState("")
+
+            setCountry("")
+        }
+
+    }
+
+
+    const fetchData = async (token) => {
+        let data = { token: token }
+        let a = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/getuser`, {
+            method: 'POST', // or 'PUT'
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+
+
+        let res = await a.json();
+        console.log(res)
+        setName(res.name);
+        setAdress(res.address);
+        setPhone(res.phone);
+        setPincode(res.pincode)
+        getPinCode(res.pincode)
+
+
+
+    }
 
     const handleChange = async (e) => {
 
@@ -67,22 +126,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
             setPincode(e.target.value)
             if (e.target.value.length == 6) {
 
-                const pins = await fetch(`${process.env.NEXT_PUBLIC_HOST}/api/pincode`)
-                let pinJson = await pins.json()
-                if (Object.keys(pinJson).includes(e.target.value)) {
-
-                    setCity(pinJson[e.target.value][0])
-
-                    setState(pinJson[e.target.value][1])
-
-                    setCountry(pinJson[e.target.value][2])
-                } else {
-                    setCity("")
-
-                    setState("")
-
-                    setCountry("")
-                }
+                getPinCode(e.target.value)
             } else {
                 setCity("")
 
@@ -92,12 +136,11 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
 
             }
         }
-        if (name && email && phone && address && pincode) {
-            setDisabled(false)
-        }
+
+
+
 
     }
-
 
 
 
@@ -154,7 +197,7 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
             }
         } else {
             console.log('not vaild mkey')
-            if(txnRes.cartClear){
+            if (txnRes.cartClear) {
                 clearCart()
             }
             toast.error(txnRes.error, {

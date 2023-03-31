@@ -19,7 +19,6 @@ function MyApp({ Component, pageProps }) {
   const router = useRouter()
 
   useEffect(() => {
-    console.log("I am for useEffect form _app.js.")
     router.events.on('routeChangeStart', () => {
       setProgress(40)
     })
@@ -33,7 +32,6 @@ function MyApp({ Component, pageProps }) {
 
       }
     } catch (error) {
-      console.error(error)
       localStorage.clear()
     }
     const myuser = JSON.parse(localStorage.getItem('myuser'))

@@ -42,7 +42,6 @@ const Signup = () => {
       body: JSON.stringify(data),
     })
     let respose = await res.json()
-    console.log(respose)
     setName('')
     setEmail('')
     setPassword('')
