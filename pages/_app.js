@@ -140,7 +140,7 @@ function MyApp({ Component, pageProps }) {
       theme="light"
     />
 
-    <Component  cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart}
+    <Component  myuser={myuser} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart}
       subTotal={subTotal} removeItemFromCart={removeItemFromCart} buyNow={buyNow}{...pageProps} />
     <Footer />
   </>
