@@ -401,7 +401,7 @@ export default function NavBar1({ logout, myuser, cart, addToCart, removeFromCar
                     <Link
                       key={page.name}
                       href={page.href}
-                      className="flex items-center mx-auto justify-center text-center text-sm font-bold text-gray-700 hover:text-gray-800 md:items-center border-[#111] hover:border-b-2"
+                      className="flex items-center mx-auto justify-center text-center text-sm font-bold text-gray-800 hover:text-blue-500 md:items-center "
                     >
                       {page.name}
                     </Link>

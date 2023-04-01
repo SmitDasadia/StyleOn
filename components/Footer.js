@@ -22,16 +22,16 @@ const Footer = () => {
               <h2 className=" font-semiblod text-white tracking-widest text-sm mb-3 font-bold ">Categories</h2>
               <nav className="list-none mb-10">
                 <Link href={'/tshirts'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Tshirts</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Tshirts</li></a>
                 </Link>
                 <Link href={'/shorts'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Shorts</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Shorts</li></a>
                 </Link>
                 <Link href={'/sportswear'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Sportswear</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Sportswear</li></a>
                 </Link>
                 <Link href={'/ethnix'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Ethnix</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Ethnix</li></a>
                 </Link>
               </nav>
             </div>
@@ -39,17 +39,17 @@ const Footer = () => {
               <h2 className="title-font  text-white tracking-widest text-sm mb-3 font-bold">Policies</h2>
               <nav className="list-none mb-10">
                 <Link href={'/privacy'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Privacy Policy</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Privacy Policy</li></a>
                 </Link>
                
                 <Link href={'/refund'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Refund Policy</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Refund Policy</li></a>
                 </Link>
                 <Link href={'/termofservice'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Terms of Service</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Terms of Service</li></a>
                 </Link>
                 <Link href={'/termofservice'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Cookies & Usage</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Cookies & Usage</li></a>
                 </Link>
               </nav>
             </div>
@@ -57,13 +57,13 @@ const Footer = () => {
               <h2 className="title-font  text-white tracking-widest text-sm mb-3 font-bold">Support</h2>
               <nav className="list-none mb-10">
                 <Link href={'/privacy'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>T-Shirt Guide</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>T-Shirt Guide</li></a>
                 </Link>
                 <Link href={'/shipping'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Customer Services</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Customer Services</li></a>
                 </Link>
                 <Link href={'/refund'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Return & Exchanges</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Return & Exchanges</li></a>
                 </Link>
                 
               </nav>
@@ -72,10 +72,10 @@ const Footer = () => {
               <h2 className="title-font  text-white tracking-widest text-sm mb-3 font-bold">Company Info</h2>
               <nav className="list-none mb-10">
                 <Link href={'/about'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>About Us</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>About Us</li></a>
                 </Link>
                 <Link href={'/contact'} legacyBehavior>
-                  <a className="text-gray-600 hover:text-white"><li>Contact Us</li></a>
+                  <a className="text-gray-600 hover:text-blue-500"><li>Contact Us</li></a>
                 </Link>
               </nav>
             </div>
