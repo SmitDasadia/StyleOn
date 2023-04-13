@@ -23,7 +23,7 @@ const Slug = ({ addToCart, product, variants, buyNow, myuser }) => {
   const [size, setSize] = useState(product.size)
 
   useEffect(() => {
-  
+
     setColor(product.color);
     setSize(product.size)
   }, [router.query])
@@ -268,13 +268,13 @@ const Slug = ({ addToCart, product, variants, buyNow, myuser }) => {
                 {!service && service != null && <div className="text-red-800">Sorry! This Pincode is not Servivceable!</div>} */}
               </div>
               <div className="flex flex-wrap -mx-2 mb-12">
-              {myuser.value &&  <button disabled={product.avialableQty == 0} onClick={() => { Router.push('/login') }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0 disabled:bg-gray-500 bg-[#111] hover:bg-gray-600 rounded-md  cursor-pointer  leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                {myuser.value && <button disabled={product.avialableQty == 0} onClick={() => { Router.push('/checkout'), addToCart(slug, 1, product.price, product.title, size, color, product.img) }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0 disabled:bg-gray-500 bg-[#111] hover:bg-gray-600 rounded-md  cursor-pointer  leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
 
-<a className="block  ">Buy Now</a>
+                  <a className="block  ">Buy Now</a>
 
-</button>}
+                </button>}
 
-                {!myuser.value &&  <button disabled={product.avialableQty == 0} onClick={() => { Router.push('/login') }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0 disabled:bg-gray-500 bg-[#111] hover:bg-gray-600 rounded-md  cursor-pointer  leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                {!myuser.value && <button disabled={product.avialableQty == 0} onClick={() => { Router.push('/login') }} className="w-full md:w-2/3 py-3 px-2 mb-2 md:mb-0 disabled:bg-gray-500 bg-[#111] hover:bg-gray-600 rounded-md  cursor-pointer  leading-8 font-heading font-medium tracking-tighter text-xl text-white text-center focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
 
                   <a className="block  ">Buy Now</a>
 

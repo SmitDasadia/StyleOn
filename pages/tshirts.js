@@ -82,13 +82,14 @@ const Tshirts = ({ products, totalProducts }) => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <section className="text-gray-600 body-font ">
+            <section className="text-black body-font ">
                 <div className=" md:py-12 lg:px-20 md:px-6 py-9 px-4">
                     <p className=" text-sm leading-3 text-gray-600 font-normal mb-2">Home / Tshirts</p>
                     <div className=" flex justify-between items-center mb-4">
                         <h2 className=" lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 font-semibold">Tshirts</h2>
 
                         {/*  filters Button (md and plus Screen) */}
+
                         <div className="container px-5 mx-auto">
                             <div className="flex justify-between">
                                 <div>
@@ -103,6 +104,7 @@ const Tshirts = ({ products, totalProducts }) => {
                                 </div>
                             </div>
                         </div>
+                        
                         <button onClick={() => setShowfilters(!showFilters)} className=" cursor-pointer sm:flex hidden hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-4 px-6 bg-[#111] text-base leading-4 font-normal text-white justify-center items-center rounded-md">
                             <svg className=" mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 12C7.10457 12 8 11.1046 8 10C8 8.89543 7.10457 8 6 8C4.89543 8 4 8.89543 4 10C4 11.1046 4.89543 12 6 12Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -129,6 +131,8 @@ const Tshirts = ({ products, totalProducts }) => {
                     </button>
                 </div>
 
+                
+
                 <div id="filterSection" className={"relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-slate-100 w-full " + (showFilters ? "hidden" : "block")}>
                     {/* Cross button Code  */}
                     <div onClick={() => setShowfilters(true)} className=" cursor-pointer absolute right-0 top-0 md:py-10 lg:px-20 md:px-6 py-9 px-4">
@@ -138,24 +142,25 @@ const Tshirts = ({ products, totalProducts }) => {
                         </svg>
                     </div>
 
-                    <div className='mt-1'>
+                    <div className='mt-1 mb-5'>
                         <p className='text-3xl font-bold py-3'>Size</p>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedSize === '' && 'bg-gray-200'}`} onClick={() => handleSizeFilter('')}>All</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedSize === 'S' && 'bg-gray-200'}`} onClick={() => handleSizeFilter('S')}>S</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedSize === 'M' && 'bg-gray-200'}`} onClick={() => handleSizeFilter('M')}>M</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedSize === 'L' && 'bg-gray-200'}`} onClick={() => handleSizeFilter('L')}>L</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedSize === 'XL' && 'bg-gray-200'}`} onClick={() => handleSizeFilter('XL')}>XL</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedSize === 'XXL' && 'bg-gray-200'}`} onClick={() => handleSizeFilter('XXL')}>XXL</button>
+                        <button className={`border border-gray-300 px-1 mx-1 rounded-md text-xl hover:border-black ${selectedSize === '' && 'bg-gray-200 border-gray-900'}`} onClick={() => handleSizeFilter('')}>All</button>
+                        <button className={`border border-gray-300 px-1 mx-1 rounded-md text-xl hover:border-black ${selectedSize === 'S' && 'bg-gray-200 border-gray-900'}`} onClick={() => handleSizeFilter('S')}>S</button>
+                        <button className={`border border-gray-300 px-1 mx-1 rounded-md text-xl hover:border-black ${selectedSize === 'M' && 'bg-gray-200 border-gray-900'}`} onClick={() => handleSizeFilter('M')}>M</button>
+                        <button className={`border border-gray-300 px-1 mx-1 rounded-md text-xl hover:border-black ${selectedSize === 'L' && 'bg-gray-200 border-gray-900'}`} onClick={() => handleSizeFilter('L')}>L</button>
+                        <button className={`border border-gray-300 px-1 mx-1 rounded-md text-xl hover:border-black ${selectedSize === 'XL' && 'bg-gray-200 border-gray-900'}`} onClick={() => handleSizeFilter('XL')}>XL</button>
+                        <button className={`border border-gray-300 px-1 mx-1 rounded-md text-xl hover:border-black ${selectedSize === 'XXL' && 'bg-gray-200 border-gray-900'}`} onClick={() => handleSizeFilter('XXL')}>XXL</button>
                     </div>
 
 
-                    <div className='mt-1'>
+                    <div className='mt-1 mb-5'>
                         <p className='text-3xl font-bold py-3'>Color</p>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedColor === '' && 'bg-white scale-150'}`} onClick={() => handleSizeFilter('')}>All</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedColor === 'Black' && 'bg-black scale-150'}`} onClick={() => handleColorFilter('Black')}>Black</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedColor === 'White' && 'bg-white scale-150'}`} onClick={() => handleColorFilter('White')}>Black</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedColor === 'Blue' && 'bg-blue-600 scale-150'}`} onClick={() => handleColorFilter('Blue')}>Black</button>
-                        <button className={`border border-gray-300 px-1 mx-1 ${selectedColor === 'Red' && 'bg-red-500 scale-150'}`} onClick={() => handleColorFilter('Red')}>Black</button>
+                        <button className={`border  w-8  h-8 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 rounded-full px-1 mx-1 ${selectedColor === '' && 'scale-125'}`} onClick={() => handleSizeFilter('')}></button>
+                       
+                        <button className={`border border-gray-300 w-8  h-8 bg-black rounded-full px-1 mx-1 ${selectedColor === 'Black' && 'scale-125'}`} onClick={() => handleColorFilter('Black')}></button>
+                        <button className={`border border-gray-300 w-8  h-8 bg-white rounded-full px-1 mx-1 ${selectedColor === 'White' && ' scale-125'}`} onClick={() => handleColorFilter('White')}></button>
+                        <button className={`border border-gray-300 w-8  h-8  bg-blue-600 rounded-full px-1 mx-1 ${selectedColor === 'Blue' && ' scale-125'}`} onClick={() => handleColorFilter('Blue')}></button>
+                        <button className={`border border-gray-300 w-8  h-8 bg-red-500  rounded-full px-1 mx-1 ${selectedColor === 'Red' && 'scale-125'}`} onClick={() => handleColorFilter('Red')}></button>
                         
                     </div>
 
@@ -163,7 +168,8 @@ const Tshirts = ({ products, totalProducts }) => {
 
                    
 
-                    <div className=" md:flex md:space-x-6 mt-8 grid grid-cols-3 gap-y-8 flex-wrap">
+                    <div className="mt-1">
+                    <p className='text-3xl font-bold py-3'>SortBy</p>
                         
 
                         <button className={`border border-gray-200 px-1 mx-1 ${sortBy === 'highToLow' && 'border-gray-900 rounded-md'}`}  onClick={() => handleSortHighToLow()}>
@@ -186,26 +192,10 @@ const Tshirts = ({ products, totalProducts }) => {
 
 
 
-                    <div className="flex flex-row w-full justify-between mb-6">
-                        <div className="relative inline-flex">
-
-                            <div className="absolute right-0 flex flex-col bg-white rounded-md shadow-lg">
-
-
-                            </div>
-                        </div>
-                    </div>
 
 
 
-
-
-
-                    <div className="px-0 mt-10 w-full md:w-auto md:mt-0 md:absolute md:right-0 md:bottom-0 md:py-10 lg:px-20 md:px-6">
-                        <button className="w-full hover:bg-gray-700 focus:ring focus:ring-offset-2 focus:ring-gray-800 text-base leading-4 font-medium py-4 px-10 text-white bg-gray-800">
-                            Apply Filter
-                        </button>
-                    </div>
+                    
                 </div>
 
 
@@ -292,7 +282,7 @@ export async function getServerSideProps(context) {
         })
     }
     let products = await Product.find({ category: "Tshirt" });
-    let totalProducts = await Product.find().count();
+    let totalProducts = await Product.find({ category: "Tshirt" }).count();
     let tshirts = {}
     for (let item of products) {
         if (item.title in tshirts) {
