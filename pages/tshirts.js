@@ -4,6 +4,10 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Product from '../models/Product';
 const mongoose = require('mongoose');
+import { FiFilter } from 'react-icons/Fi';
+
+import { XMarkIcon } from '@heroicons/react/24/outline'
+import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 
 const Tshirts = ({ products, totalProducts }) => {
     const [showFilters, setShowfilters] = useState(true);
@@ -12,6 +16,8 @@ const Tshirts = ({ products, totalProducts }) => {
     const [selectedSize, setSelectedSize] = useState('');
     const [selectedPriceRange, setSelectedPriceRange] = useState('');
     const [sortBy, setSortBy] = useState('');
+
+    const [search, setSearch] = useState("");
 
     // Function to handle color filter
     const handleColorFilter = (color) => {
@@ -42,6 +48,11 @@ const Tshirts = ({ products, totalProducts }) => {
         setSortBy('');
     }
 
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    };
+
+
 
     // Filter products by selected color, size and price range
     const filteredProducts = Object.values(products).filter(product => (
@@ -58,6 +69,10 @@ const Tshirts = ({ products, totalProducts }) => {
     } else if (sortBy === 'lowToHigh') {
         sortedProducts = filteredProducts.sort((a, b) => a.price - b.price);
     }
+
+    const searchedProducts = sortedProducts.filter(product =>
+        product.title.toLowerCase().includes(search.toLowerCase())
+    );
     // Function to generate the price range options
     const getPriceRangeOptions = () => {
         return [
@@ -83,10 +98,36 @@ const Tshirts = ({ products, totalProducts }) => {
             </Head>
 
             <section className="text-black body-font ">
+
+                <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
+                        <h1 className="text-4xl font-bold tracking-tight text-gray-900 ">Tshirts
+                        <p className="text-xl leading-5 text-gray-600 font-medium py-2 px-2">{totalProducts} Tshirts</p>
+                        </h1>
+
+                        <div className="flex items-center">
+                            <div className='mx-10'>
+                                <input className="px-4 py-2 border rounded-md"
+                                    placeholder="Search products by title"
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)} />
+
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+
+                </main>
+
+
                 <div className=" md:py-12 lg:px-20 md:px-6 py-9 px-4">
-                    <p className=" text-sm leading-3 text-gray-600 font-normal mb-2">Home / Tshirts</p>
+
                     <div className=" flex justify-between items-center mb-4">
-                        <h2 className=" lg:text-4xl text-3xl lg:leading-9 leading-7 text-gray-800 font-semibold">Tshirts</h2>
+
 
                         {/*  filters Button (md and plus Screen) */}
 
@@ -104,7 +145,7 @@ const Tshirts = ({ products, totalProducts }) => {
                                 </div>
                             </div>
                         </div>
-                        
+
                         <button onClick={() => setShowfilters(!showFilters)} className=" cursor-pointer sm:flex hidden hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-4 px-6 bg-[#111] text-base leading-4 font-normal text-white justify-center items-center rounded-md">
                             <svg className=" mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M6 12C7.10457 12 8 11.1046 8 10C8 8.89543 7.10457 8 6 8C4.89543 8 4 8.89543 4 10C4 11.1046 4.89543 12 6 12Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -121,7 +162,7 @@ const Tshirts = ({ products, totalProducts }) => {
                         </button>
 
                     </div>
-                    <p className=" text-xl leading-5 text-gray-600 font-medium">{totalProducts} Tshirts</p>
+
 
                     {/* Filters Button (Small Screen)  */}
 
@@ -131,7 +172,7 @@ const Tshirts = ({ products, totalProducts }) => {
                     </button>
                 </div>
 
-                
+
 
                 <div id="filterSection" className={"relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-slate-100 w-full " + (showFilters ? "hidden" : "block")}>
                     {/* Cross button Code  */}
@@ -156,27 +197,27 @@ const Tshirts = ({ products, totalProducts }) => {
                     <div className='mt-1 mb-5'>
                         <p className='text-3xl font-bold py-3'>Color</p>
                         <button className={`border  w-8  h-8 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 rounded-full px-1 mx-1 ${selectedColor === '' && 'scale-125'}`} onClick={() => handleSizeFilter('')}></button>
-                       
+
                         <button className={`border border-gray-300 w-8  h-8 bg-black rounded-full px-1 mx-1 ${selectedColor === 'Black' && 'scale-125'}`} onClick={() => handleColorFilter('Black')}></button>
                         <button className={`border border-gray-300 w-8  h-8 bg-white rounded-full px-1 mx-1 ${selectedColor === 'White' && ' scale-125'}`} onClick={() => handleColorFilter('White')}></button>
                         <button className={`border border-gray-300 w-8  h-8  bg-blue-600 rounded-full px-1 mx-1 ${selectedColor === 'Blue' && ' scale-125'}`} onClick={() => handleColorFilter('Blue')}></button>
                         <button className={`border border-gray-300 w-8  h-8 bg-red-500  rounded-full px-1 mx-1 ${selectedColor === 'Red' && 'scale-125'}`} onClick={() => handleColorFilter('Red')}></button>
-                        
+
                     </div>
 
-                    
 
-                   
+
+
 
                     <div className="mt-1">
-                    <p className='text-3xl font-bold py-3'>SortBy</p>
-                        
+                        <p className='text-3xl font-bold py-3'>SortBy</p>
 
-                        <button className={`border border-gray-200 px-1 mx-1 ${sortBy === 'highToLow' && 'border-gray-900 rounded-md'}`}  onClick={() => handleSortHighToLow()}>
+
+                        <button className={`border border-gray-200 px-1 mx-1 ${sortBy === 'highToLow' && 'border-gray-900 rounded-md'}`} onClick={() => handleSortHighToLow()}>
                             Price High to Low
                         </button>
 
-                        <button  className={`border border-gray-200 px-1 mx-1 ${sortBy === 'lowToHigh' && 'border-gray-900 rounded-md'}`} onClick={() => handleSortLowToHigh()}>
+                        <button className={`border border-gray-200 px-1 mx-1 ${sortBy === 'lowToHigh' && 'border-gray-900 rounded-md'}`} onClick={() => handleSortLowToHigh()}>
                             Price Low to High
                         </button>
                         <button className={`border border-gray-200 px-1 mx-1 ${sortBy === '' && 'border-gray-900 rounded-md'}`} onClick={() => handleResetSort()}>
@@ -195,7 +236,7 @@ const Tshirts = ({ products, totalProducts }) => {
 
 
 
-                    
+
                 </div>
 
 
@@ -203,56 +244,56 @@ const Tshirts = ({ products, totalProducts }) => {
                 <div className="container px-5 py-24 mx-auto">
                     <div className="flex flex-wrap -m-4 justify-center">
 
-                        {Object.keys(sortedProducts).map((item) => {
+                        {Object.keys(searchedProducts).map((item) => {
 
-                            return <Link passHref={true} key={sortedProducts[item]._id} href={`/product/${sortedProducts[item].slug}`} legacyBehavior>
+                            return <Link passHref={true} key={searchedProducts[item]._id} href={`/product/${searchedProducts[item].slug}`} legacyBehavior>
                                 <div className="lg:w-1/4 md:w-1/2 p-4 w-full border rounded-md cursor-pointer shadow-lg m-5 hover:shadow-2xl hover:scale-105">
                                     <a className="block relative rounded overflow-hidden">
-                                        <img alt="ecommerce" className="m-auto block h-[50vh] w-[80vh]" src={sortedProducts[item].img} />
+                                        <img alt="ecommerce" className="m-auto block h-[50vh] w-[80vh]" src={searchedProducts[item].img} />
                                     </a>
                                     <div className="mt-4 text-center md:text-left">
                                         <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
-                                            {sortedProducts[item].category}
+                                            {searchedProducts[item].category}
                                         </h3>
-                                        <h2 className="text-gray-900 title-font text-md font-medium">{sortedProducts[item].title}</h2>
+                                        <h2 className="text-gray-900 title-font text-md font-medium">{searchedProducts[item].title}</h2>
                                     </div>
 
                                     <div className='mt-1'>
-                                        {sortedProducts[item].color.includes("White") && <button className="inline-flex items-center justify-center p-1">
+                                        {searchedProducts[item].color.includes("White") && <button className="inline-flex items-center justify-center p-1">
                                             <div className="w-4 h-4 rounded-full bg-white border border-gray-400"></div>
                                         </button>}
-                                        {sortedProducts[item].color.includes("Red") && <button className="inline-flex items-center justify-center p-1">
+                                        {searchedProducts[item].color.includes("Red") && <button className="inline-flex items-center justify-center p-1">
                                             <div className="w-4 h-4 rounded-full bg-red-500"></div>
                                         </button>}
-                                        {sortedProducts[item].color.includes("Black") && <button className="inline-flex items-center justify-center p-1 ">
+                                        {searchedProducts[item].color.includes("Black") && <button className="inline-flex items-center justify-center p-1 ">
                                             <div className="w-4 h-4 rounded-full bg-black"></div>
                                         </button>}
-                                        {sortedProducts[item].color.includes("Blue") && <button className="inline-flex items-center justify-center p-1 ">
+                                        {searchedProducts[item].color.includes("Blue") && <button className="inline-flex items-center justify-center p-1 ">
                                             <div className="w-4 h-4 rounded-full bg-blue-600"></div>
                                         </button>}
-                                        {sortedProducts[item].color.includes("Green") && <button className="inline-flex items-center justify-center p-1 ">
+                                        {searchedProducts[item].color.includes("Green") && <button className="inline-flex items-center justify-center p-1 ">
                                             <div className="w-4 h-4 rounded-full bg-green-600"></div>
                                         </button>}
-                                        {sortedProducts[item].color.includes("Yellow") && <button className="inline-flex items-center justify-center p-1 ">
+                                        {searchedProducts[item].color.includes("Yellow") && <button className="inline-flex items-center justify-center p-1 ">
                                             <div className="w-4 h-4 rounded-full bg-yellow-400"></div>
                                         </button>}
                                     </div>
 
                                     <div className='mt-1'>
-                                        {sortedProducts[item].size.includes("S") && <span className='border border-gray-300 px-1 mx-1'>S</span>}
-                                        {sortedProducts[item].size.includes("M") && <span className='border border-gray-300 px-1 mx-1'>M</span>}
-                                        {sortedProducts[item].size.includes("L") && <span className='border border-gray-300 px-1 mx-1'>L</span>}
-                                        {sortedProducts[item].size.includes("XL") && <span className='border border-gray-300 px-1 mx-1'>XL</span>}
-                                        {sortedProducts[item].size.includes("XXL") && <span className='border border-gray-300 px-1 mx-1'>XXL</span>}
-                                        {sortedProducts[item].size.includes("XXXL") && <span className='border border-gray-300 px-1 mx-1'>XXXL</span>}
-                                        {sortedProducts[item].size.includes("XXXXL") && <span className='border border-gray-300 px-1 mx-1'>XXXXL</span>}
-                                        {sortedProducts[item].size.includes("XXXXXL") && <span className='border border-gray-300 px-1 mx-1'>XXXXXL</span>}
+                                        {searchedProducts[item].size.includes("S") && <span className='border border-gray-300 px-1 mx-1'>S</span>}
+                                        {searchedProducts[item].size.includes("M") && <span className='border border-gray-300 px-1 mx-1'>M</span>}
+                                        {searchedProducts[item].size.includes("L") && <span className='border border-gray-300 px-1 mx-1'>L</span>}
+                                        {searchedProducts[item].size.includes("XL") && <span className='border border-gray-300 px-1 mx-1'>XL</span>}
+                                        {searchedProducts[item].size.includes("XXL") && <span className='border border-gray-300 px-1 mx-1'>XXL</span>}
+                                        {searchedProducts[item].size.includes("XXXL") && <span className='border border-gray-300 px-1 mx-1'>XXXL</span>}
+                                        {searchedProducts[item].size.includes("XXXXL") && <span className='border border-gray-300 px-1 mx-1'>XXXXL</span>}
+                                        {searchedProducts[item].size.includes("XXXXXL") && <span className='border border-gray-300 px-1 mx-1'>XXXXXL</span>}
                                     </div>
 
 
 
                                     <div className='mt-1 text-right text-md font-bold text-black'>
-                                        <p>₹{sortedProducts[item].price}</p>
+                                        <p>₹{searchedProducts[item].price}</p>
                                     </div>
 
                                 </div>
