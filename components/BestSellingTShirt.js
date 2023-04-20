@@ -132,11 +132,11 @@ const BestSellingTshirt = () => {
                         {BestSellingTshirt.map((product) => (
                             <Link href={product.href} key={product.title} legacyBehavior>
                                 <div className="group relative cursor-pointer">
-                                    <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 hover:bg-gray-700 lg:aspect-none lg:h-80 ">
+                                    <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:scale-105 hover:bg-gray-700 lg:aspect-none lg:h-80 ">
                                         <img
                                             src={product.imageSrc}
                                             alt={product.imageAlt}
-                                            className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                            className="h-full w-full object-cover object-center lg:h-full lg:w-full hover:scale-110"
                                         />
                                     </div>
                                     <div className="mt-4 flex justify-between">

@@ -34,7 +34,7 @@ export default function Home() {
 
         {/* offers */}
 
-        <Offers />
+        {/* <Offers /> */}
         {/* benifits */}
 
         <Benifits />
