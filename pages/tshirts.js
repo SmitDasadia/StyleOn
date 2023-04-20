@@ -4,19 +4,15 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import Product from '../models/Product';
 const mongoose = require('mongoose');
-import { FiFilter } from 'react-icons/Fi';
+import { FiFilter,FiX } from 'react-icons/Fi';
 
-import { XMarkIcon } from '@heroicons/react/24/outline'
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon } from '@heroicons/react/20/solid'
 
 const Tshirts = ({ products, totalProducts }) => {
     const [showFilters, setShowfilters] = useState(true);
-
     const [selectedColor, setSelectedColor] = useState('');
     const [selectedSize, setSelectedSize] = useState('');
-    const [selectedPriceRange, setSelectedPriceRange] = useState('');
-    const [sortBy, setSortBy] = useState('');
-
+    const [sortOrder, setSortOrder] = useState('fea');
+    const [priceRange, setPriceRange] = useState([0, 1000]);
     const [search, setSearch] = useState("");
 
     // Function to handle color filter
@@ -30,60 +26,39 @@ const Tshirts = ({ products, totalProducts }) => {
     }
 
     // Function to handle price range filter
-    const handlePriceRangeFilter = (priceRange) => {
-        setSelectedPriceRange(priceRange);
-    }
-
-    const handleSortHighToLow = () => {
-        setSortBy('highToLow');
-    }
-
-    // Function to handle sort by price low to high
-    const handleSortLowToHigh = () => {
-        setSortBy('lowToHigh');
-    }
-
-    // Function to reset the sort
-    const handleResetSort = () => {
-        setSortBy('');
-    }
-
+    
+    
     const handleSearch = (event) => {
         setSearch(event.target.value);
     };
 
 
 
-    // Filter products by selected color, size and price range
     const filteredProducts = Object.values(products).filter(product => (
         (selectedColor === '' || product.color.includes(selectedColor))
         && (selectedSize === '' || product.size.includes(selectedSize))
-        && (selectedPriceRange === ''
-            || (product.price >= selectedPriceRange.min && product.price <= selectedPriceRange.max))
+
     ));
 
 
-    let sortedProducts = filteredProducts;
-    if (sortBy === 'highToLow') {
-        sortedProducts = filteredProducts.sort((a, b) => b.price - a.price);
-    } else if (sortBy === 'lowToHigh') {
-        sortedProducts = filteredProducts.sort((a, b) => a.price - b.price);
-    }
+
+
+
+
+    const sortedProducts = filteredProducts.sort((a, b) => {
+        if (sortOrder === 'asc') {
+            return a.price - b.price;
+        } else if (sortOrder == 'desc') {
+            return b.price - a.price;
+        } else if (setSortOrder === 'fea') {
+            return products
+        }
+    })
 
     const searchedProducts = sortedProducts.filter(product =>
-        product.title.toLowerCase().includes(search.toLowerCase())
+        product.title.toLowerCase().includes(search.toLowerCase()) && product.price >= priceRange[0] && product.price <= priceRange[1]
     );
-    // Function to generate the price range options
-    const getPriceRangeOptions = () => {
-        return [
-            { label: '₹100 - ₹300', value: { min: 100, max: 300 } },
-            { label: '₹300 - ₹500', value: { min: 300, max: 500 } },
-            { label: '₹500 - ₹1000', value: { min: 500, max: 1000 } },
-            { label: '₹1000 - ₹1500', value: { min: 1000, max: 1500 } },
-            { label: '₹1500 - ₹2000', value: { min: 1500, max: 2000 } },
-            { label: 'Over ₹2000', value: { min: 2000, max: 10000 } },
-        ];
-    }
+
 
 
 
@@ -102,17 +77,33 @@ const Tshirts = ({ products, totalProducts }) => {
                 <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
                         <h1 className="text-4xl font-bold tracking-tight text-gray-900 ">Tshirts
-                        <p className="text-xl leading-5 text-gray-600 font-medium py-2 px-2">{totalProducts} Tshirts</p>
+                            <p className="text-xl leading-5 text-gray-600 font-medium py-2 px-2">{totalProducts} Tshirts</p>
                         </h1>
 
                         <div className="flex items-center">
-                            <div className='mx-10'>
+                            <div className='mx-3'>
                                 <input className="px-4 py-2 border rounded-md"
                                     placeholder="Search products by title"
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)} />
 
+
+
                             </div>
+                            
+
+                            <button onClick={() => setShowfilters(!showFilters)} className=" cursor-pointer sm:flex hidden hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-3 px-6 bg-[#111] text-base leading-4 font-normal text-white justify-center items-center rounded-md">
+
+
+
+                                <FiFilter className='mx-1 text-center'></FiFilter>Filters
+                            </button>
+
+
+                            
+
+
+
 
 
 
@@ -126,47 +117,12 @@ const Tshirts = ({ products, totalProducts }) => {
 
                 <div className=" md:py-12 lg:px-20 md:px-6 py-9 px-4">
 
-                    <div className=" flex justify-between items-center mb-4">
-
-
-                        {/*  filters Button (md and plus Screen) */}
-
-                        <div className="container px-5 mx-auto">
-                            <div className="flex justify-between">
-                                <div>
-
-                                </div>
-                                <div>
-                                    <select className="px-4 py-2 border rounded-md" value={selectedPriceRange} onChange={(e) => handlePriceRangeFilter(JSON.parse(e.target.value))}>
-                                        {getPriceRangeOptions().map(option => (
-                                            <option key={option.label} value={JSON.stringify(option.value)} placeholder={option.label}>{option.label}</option>
-                                        ))}
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button onClick={() => setShowfilters(!showFilters)} className=" cursor-pointer sm:flex hidden hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 py-4 px-6 bg-[#111] text-base leading-4 font-normal text-white justify-center items-center rounded-md">
-                            <svg className=" mr-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6 12C7.10457 12 8 11.1046 8 10C8 8.89543 7.10457 8 6 8C4.89543 8 4 8.89543 4 10C4 11.1046 4.89543 12 6 12Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M6 4V8" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M6 12V20" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M12 18C13.1046 18 14 17.1046 14 16C14 14.8954 13.1046 14 12 14C10.8954 14 10 14.8954 10 16C10 17.1046 10.8954 18 12 18Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M12 4V14" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M12 18V20" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M18 9C19.1046 9 20 8.10457 20 7C20 5.89543 19.1046 5 18 5C16.8954 5 16 5.89543 16 7C16 8.10457 16.8954 9 18 9Z" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M18 4V5" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                                <path d="M18 9V20" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            Filters
-                        </button>
-
-                    </div>
+                    
 
 
                     {/* Filters Button (Small Screen)  */}
 
-                    <button onClick={() => setShowfilters(!showFilters)} className="cursor-pointer mt-6 block sm:hidden hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 w-full bg-[#111] text-base leading-4 font-normal text-white justify-center items-center rounded-md py-3 px-2 mb-2">
+                    <button onClick={() => setShowfilters(!showFilters)} className="cursor-pointer mt-2 block sm:hidden hover:bg-gray-700 focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 w-full bg-[#111] text-base leading-4 font-normal text-white justify-center items-center rounded-md py-3 px-2 mb-2">
 
                         Filters
                     </button>
@@ -177,11 +133,21 @@ const Tshirts = ({ products, totalProducts }) => {
                 <div id="filterSection" className={"relative md:py-10 lg:px-20 md:px-6 py-9 px-4 bg-slate-100 w-full " + (showFilters ? "hidden" : "block")}>
                     {/* Cross button Code  */}
                     <div onClick={() => setShowfilters(true)} className=" cursor-pointer absolute right-0 top-0 md:py-10 lg:px-20 md:px-6 py-9 px-4">
-                        <svg className=" lg:w-6 lg:h-6 w-4 h-4" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M25 1L1 25" stroke="#1F2937" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                            <path d="M1 1L25 25" stroke="#27272A" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
+                        <FiX className='h-10 w-10'></FiX>
                     </div>
+
+                    <div className="mt-1 mb-5">
+                    <p className='text-3xl font-bold py-3'>Sort By</p>
+                                <select
+                                    id="sort-order"
+                                    value={sortOrder}
+                                    onChange={e => setSortOrder(e.target.value)}
+                                    className="bg-white border border-gray-300 rounded-md p-1">
+                                    <option value="fea">Featured</option>
+                                    <option value="asc">Price: Low to High</option>
+                                    <option value="desc">Price: High to Low</option>
+                                </select>
+                            </div>
 
                     <div className='mt-1 mb-5'>
                         <p className='text-3xl font-bold py-3'>Size</p>
@@ -205,37 +171,27 @@ const Tshirts = ({ products, totalProducts }) => {
 
                     </div>
 
-
-
-
-
-                    <div className="mt-1">
-                        <p className='text-3xl font-bold py-3'>SortBy</p>
-
-
-                        <button className={`border border-gray-200 px-1 mx-1 ${sortBy === 'highToLow' && 'border-gray-900 rounded-md'}`} onClick={() => handleSortHighToLow()}>
-                            Price High to Low
-                        </button>
-
-                        <button className={`border border-gray-200 px-1 mx-1 ${sortBy === 'lowToHigh' && 'border-gray-900 rounded-md'}`} onClick={() => handleSortLowToHigh()}>
-                            Price Low to High
-                        </button>
-                        <button className={`border border-gray-200 px-1 mx-1 ${sortBy === '' && 'border-gray-900 rounded-md'}`} onClick={() => handleResetSort()}>
-                            Reset Sort
-                        </button>
+                    <div className="mt-1 mb-5">
+                    <p className='text-3xl font-bold py-3'>Price Range</p>
+                        <p>₹{priceRange[0]} - ₹{priceRange[1]}</p>
+                        <input
+                            id="price-range"
+                            type="range"
+                            min="0"
+                            max="1000"
+                            value={priceRange[0]}
+                            onChange={e => setPriceRange([parseInt(e.target.value), priceRange[1]])}
+                            className="appearance-none bg-[#111] h-2 w-40 rounded-md"
+                        />
+                        <input
+                            type="range"
+                            min="0"
+                            max="1000"
+                            value={priceRange[1]}
+                            onChange={e => setPriceRange([priceRange[0], parseInt(e.target.value)])}
+                            className="appearance-none bg-[#111] h-2 w-40 rounded-md"
+                        />
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
                 </div>
 
