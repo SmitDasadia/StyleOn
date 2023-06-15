@@ -105,7 +105,7 @@ const Signup = () => {
       theme: "light",
     });
     setTimeout(() => {
-      router.push('http://localhost:3000/login')
+      router.push(`${process.env.NEXT_PUBLIC_HOST}/login`)
     }, 4000);
   }
 

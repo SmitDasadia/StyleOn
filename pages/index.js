@@ -20,7 +20,7 @@ export default function Home() {
 
         {/* Carousel */}
 
-        <Carousel images={['https://img.freepik.com/premium-vector/summer-seasonal-banner-with-advertising-text-objects_498838-302.jpg?w=826', 'https://img.freepik.com/premium-vector/summer-fashion-sale-banner-design-template_2239-1174.jpg?w=996', 'https://img.freepik.com/free-vector/abstract-fashion-monsoon-sale-banner-offer-discount-business-background-free-vector_1340-22458.jpg?w=996&t=st=1679986840~exp=1679987440~hmac=cef526e6853bfc355763fcac1b97641f2114fbf3e06934d59bd89ca452d0e1f0']} />
+        <Carousel  />
 
         {/* trending */}
 
