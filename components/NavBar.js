@@ -9,9 +9,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRef } from 'react';
 import { BsTruck } from 'react-icons/Bs';
-import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2,FiX, FiMinus,FiPlus } from 'react-icons/Fi';
+import { FiUserCheck, FiUser, FiShoppingBag, FiMenu, FiTrash2,FiX, FiMinus,FiPlus } from 'react-icons/fi';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css'; 
 import { useRouter } from 'next/router'
 
 const navigation = {

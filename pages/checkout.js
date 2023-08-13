@@ -13,7 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-import { FiTrash2, FiMinus, FiPlus } from 'react-icons/Fi';
+import { FiTrash2, FiMinus, FiPlus } from 'react-icons/fi';
 
 
 

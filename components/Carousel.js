@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 // /* eslint-disable @next/next/no-img-element */
-import { FiChevronRight, FiChevronLeft } from 'react-icons/Fi';
 
 
 import React, { useState, useEffect } from 'react';
