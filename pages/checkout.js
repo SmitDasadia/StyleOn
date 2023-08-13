@@ -293,11 +293,11 @@ const Checkout = ({ cart, addToCart, removeFromCart, clearCart, subTotal, remove
                                 <div className="space-x-0 lg:flex lg:space-x-4">
                                     <div className="w-full lg:w-1/2 ">
                                         <label htmlFor='pincode'
-                                            className="block mb-3 text-sm font-semibold ">Pincodes [  360001,380001,391740,395003,382010,943001,913061]</label>
+                                            className="block mb-3 text-sm font-semibold ">Pincodes </label>
 
 
 
-                                        <input value={pincode} onChange={handleChange} name="pincode" type="text" placeholder="Pincode" id='pincode'
+                                        <input value={pincode} onChange={handleChange} name="pincode" type="text" placeholder="Available pinocdes are 360001,380001,391740,395003,382010,943001,913061" id='pincode'
                                             className="w-full px-4 py-3 text-sm  border-2 outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md" />
                                     </div>
                                     <div className="w-full lg:w-1/2">
