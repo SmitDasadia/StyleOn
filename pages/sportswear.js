@@ -4,7 +4,7 @@ import React, { useState, Fragment } from 'react'
 import Link from 'next/link'
 import Product from '../models/Product';
 const mongoose = require('mongoose');
-import { FiFilter, FiX } from 'react-icons/Fi';
+import { FiFilter, FiX } from 'react-icons/fi';
 
 const SportsWear = ({ products, totalProducts }) => {
     const [showFilters, setShowfilters] = useState(true);

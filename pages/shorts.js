@@ -5,7 +5,7 @@ import Link from 'next/link'
 import Product from '../models/Product';
 const mongoose = require('mongoose');
 
-import { FiFilter, FiX } from 'react-icons/Fi';
+import { FiFilter, FiX } from 'react-icons/fi';
 const Shorts = ({ products, totalProducts }) => {
     const [showFilters, setShowfilters] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');

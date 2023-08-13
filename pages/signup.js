@@ -2,7 +2,7 @@
 import { React, useState, useEffect } from 'react'
 import { useRouter } from 'next/router';
 import Link from 'next/link'
-import { HiOutlineLockClosed } from 'react-icons/Hi';
+import { HiOutlineLockClosed } from 'react-icons/hi';
 import { set } from 'mongoose';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
