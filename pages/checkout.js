@@ -5,8 +5,6 @@
 /* eslint-disable @next/next/no-css-tags */
 import React, { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
-import { IoMdClose, IoMdAdd, IoMdRemove } from 'react-icons/Io';
-import { MdDeleteOutline } from 'react-icons/Md';
 import Head from 'next/head';
 import Script from 'next/script';
 import { ToastContainer, toast } from 'react-toastify';
