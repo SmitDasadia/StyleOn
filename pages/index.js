@@ -2,7 +2,6 @@
 import Head from "next/head";
 import Benifits from "../components/Benifits";
 import Offers from "../components/offers";
-import styles from "../styles/Home.module.css";
 import Carousel from "../components/Carousel";
 import BestSellingTShirt from "../components/BestSellingTShirt";
 
