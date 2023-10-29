@@ -6,7 +6,6 @@ import { HiOutlineLockClosed } from 'react-icons/hi';
 import { set } from 'mongoose';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import classNames from 'classnames';
 import Head from "next/head";
 
 
