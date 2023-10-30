@@ -3,7 +3,7 @@ import Head from 'next/head';
 import React, { useState, Fragment } from 'react'
 import Link from 'next/link'
 import Product from '../models/Product';
-const mongoose = require('mongoose');
+import { connectToDB } from "../middleware/Mongoose.ts";
 import { FiFilter, FiX } from 'react-icons/fi';
 
 const Ethnix = ({ products, totalProducts }) => {
@@ -317,15 +317,10 @@ const Ethnix = ({ products, totalProducts }) => {
 }
 
 
+export const getServerSideProps = (async (context) => {
+    connectToDB()
 
-export async function getServerSideProps(context) {
-    if (!mongoose.connections[0].readyState) {
-        await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-            family: 4,
-        })
-    }
+
     let products = await Product.find({ category: "Ethnix" })
 
 
@@ -353,6 +348,6 @@ export async function getServerSideProps(context) {
     return {
         props: { products: JSON.parse(JSON.stringify(bundi)), totalProducts: JSON.parse(JSON.stringify(totalProducts)) }, // will be passed to the page component as props
     }
-}
+})
 
 export default Ethnix
