@@ -7,4 +7,3 @@ export default function handler(req, res) {
   }
   
 
-  360001,380001,391740,395003,382010

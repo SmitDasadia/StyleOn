@@ -3,8 +3,8 @@ import Head from 'next/head';
 import React, { useState, Fragment } from 'react'
 import Link from 'next/link'
 import Product from '../models/Product';
+const mongoose = require('mongoose');
 import { FiFilter, FiX } from 'react-icons/fi';
-import { connectToDB } from "../middleware/Mongoose.ts";
 
 const SportsWear = ({ products, totalProducts }) => {
     const [showFilters, setShowfilters] = useState(true);
@@ -317,12 +317,14 @@ const SportsWear = ({ products, totalProducts }) => {
 }
 
 
-
-
-
-
-export const getServerSideProps = (async (context) => {
-    connectToDB()
+export async function getServerSideProps(context) {
+    if (!mongoose.connections[0].readyState) {
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            family: 4,
+        })
+    }
     let products = await Product.find({ category: "SportsWear" });
 
 
@@ -351,5 +353,6 @@ export const getServerSideProps = (async (context) => {
     return {
         props: { products: JSON.parse(JSON.stringify(sportswear)), totalProducts: JSON.parse(JSON.stringify(totalProducts)) }, // will be passed to the page component as props
     }
-  })
+}
+
 export default SportsWear

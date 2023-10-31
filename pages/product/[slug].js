@@ -5,9 +5,9 @@ import Router, { useRouter } from 'next/router'
 import Head from 'next/head'
 import Link from 'next/link'
 import Product from '../../models/Product'
+import mongoose from 'mongoose'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { connectToDB } from "../../middleware/Mongoose.ts";
 
 const Slug = ({ addToCart, product, variants, buyNow, myuser }) => {
 
@@ -370,11 +370,14 @@ const Slug = ({ addToCart, product, variants, buyNow, myuser }) => {
   )
 }
 
-
-
-
-export const getServerSideProps = (async (context) => {
-  connectToDB()
+export async function getServerSideProps(context) {
+  if (!mongoose.connections[0].readyState) {
+    await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      family: 4,
+    })
+  }
   let error;
   let product = await Product.findOne({ slug: context.query.slug })
 
@@ -393,8 +396,6 @@ export const getServerSideProps = (async (context) => {
   return {
     props: { product: JSON.parse(JSON.stringify(product)), variants: JSON.parse(JSON.stringify(colorSizeSlug)) }, // will be passed to the page component as props
   }
+}
 
-
-  
-})
 export default Slug
